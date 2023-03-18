@@ -5,31 +5,28 @@ import com.gmail.murcisluis.baseplugin.api.commands.AbstractCommand;
 import com.gmail.murcisluis.baseplugin.api.commands.CommandHandler;
 import com.gmail.murcisluis.baseplugin.api.commands.CommandInfo;
 import com.gmail.murcisluis.baseplugin.api.commands.TabCompleteHandler;
-@CommandInfo(
-        permission = "bp.use",
-        usage = "/bp <args>",
-        description = "The main command."
-)
-public class MyCommand extends AbstractCommand {
-    public MyCommand() {
-        super("baseplugin");
+import com.gmail.murcisluis.baseplugin.api.utils.scheduler.S;
 
-        addSubCommand(new ReloadSubCommand());
+@CommandInfo(
+        permission = "bp.admin",
+        usage = "/bp reload",
+        description = "Reload the plugin."
+)
+public class ReloadSubCommand extends AbstractCommand  {
+
+    public ReloadSubCommand() {
+        super("reload");
     }
 
     @Override
     public CommandHandler getCommandHandler() {
         return (sender, args) -> {
-            if (sender.hasPermission("dh.admin")) {
-                if (args.length == 0) {
-                    Lang.USE_HELP.send(sender);
-                    return true;
-                }
-                Lang.UNKNOWN_SUB_COMMAND.send(sender);
-                Lang.USE_HELP.send(sender);
-            } else {
-                Lang.sendVersionMessage(sender);
-            }
+            S.async(() -> {
+                long start = System.currentTimeMillis();
+                PLUGIN.reload();
+                long end = System.currentTimeMillis();
+                Lang.RELOADED.send(sender, end - start);
+            });
             return true;
         };
     }
@@ -38,4 +35,5 @@ public class MyCommand extends AbstractCommand {
     public TabCompleteHandler getTabCompleteHandler() {
         return null;
     }
+
 }
