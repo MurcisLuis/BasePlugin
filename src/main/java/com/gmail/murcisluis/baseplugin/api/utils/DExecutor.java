@@ -16,7 +16,7 @@ public class DExecutor {
     private static ExecutorService service;
 
     /**
-     * Initialize DExecutor. This method will set up ExecutorService for DecentHolograms.
+     * Initialize DExecutor. This method will set up ExecutorService for
      *
      * @param threads Amount of threads to use.
      */
@@ -25,7 +25,7 @@ public class DExecutor {
             AtomicInteger threadId = new AtomicInteger(0);
             service = Executors.newFixedThreadPool(threads, runnable -> {
                 Thread thread = new Thread(runnable);
-                thread.setName("DecentHolograms Thread #" + threadId.incrementAndGet());
+                thread.setName("Thread #" + threadId.incrementAndGet());
                 thread.setPriority(Thread.NORM_PRIORITY);
                 thread.setDaemon(true);
                 thread.setUncaughtExceptionHandler((t, ex) -> {

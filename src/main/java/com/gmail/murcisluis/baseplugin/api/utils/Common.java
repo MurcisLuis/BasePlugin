@@ -69,7 +69,7 @@ public class Common {
 	 * @param message The message.
 	 */
 	public static void log(Level level, String message) {
-		Bukkit.getServer().getLogger().log(level, "[DecentHolograms] " + message);
+		Bukkit.getServer().getLogger().log(level, "[BaseManager] " + message);
 	}
 
 	/**
