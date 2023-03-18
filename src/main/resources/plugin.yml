@@ -1,0 +1,6 @@
+name: BasePlugin
+version: '${project.version}'
+main: com.gmail.murcisluis.baseplugin.plugin.BasePlugin
+api-version: 1.19
+authors: [ Murcis_Luis, Meerkap ]
+description: A base plugin
