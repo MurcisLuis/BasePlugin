@@ -42,4 +42,8 @@ public class Base {
         }
         return dataFolder;
     }
+
+    public JavaPlugin getPlugin() {
+        return plugin;
+    }
 }
