@@ -1,6 +1,6 @@
-package com.gmail.murcisluis.baseplugin.api.utils.color.color.patterns;
+package com.gmail.murcisluis.baseplugin.api.utils.color.patterns;
 
-import com.gmail.murcisluis.lujochat.api.utils.color.IridiumColorAPI;
+import com.gmail.murcisluis.baseplugin.api.utils.color.IridiumColorAPI;
 
 import java.util.regex.Matcher;
 

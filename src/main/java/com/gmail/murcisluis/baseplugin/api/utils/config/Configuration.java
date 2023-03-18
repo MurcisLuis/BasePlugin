@@ -1,4 +1,4 @@
-package com.gmail.murcisluis.baseplugin.api.utils.reflect.config;
+package com.gmail.murcisluis.baseplugin.api.utils.config;
 
 import com.google.common.collect.Sets;
 import org.bukkit.configuration.InvalidConfigurationException;

@@ -1,6 +1,6 @@
-package com.gmail.murcisluis.baseplugin.api.utils.reflect.config;
+package com.gmail.murcisluis.baseplugin.api.utils.config;
 
-import com.gmail.murcisluis.lujochat.api.utils.Common;
+import com.gmail.murcisluis.baseplugin.api.utils.Common;
 import org.bukkit.command.CommandSender;
 
 public class Phrase extends ConfigValue<String> {

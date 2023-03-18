@@ -1,4 +1,4 @@
-package com.gmail.murcisluis.baseplugin.api.utils.color.color.patterns;
+package com.gmail.murcisluis.baseplugin.api.utils.color.patterns;
 
 /**
  * Represents a color pattern which can be applied to a String.

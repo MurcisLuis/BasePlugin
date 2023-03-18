@@ -1,4 +1,4 @@
-package com.gmail.murcisluis.baseplugin.api.utils.reflect.config;
+package com.gmail.murcisluis.baseplugin.api.utils.config;
 
 public class DoubleConfigValue {
 

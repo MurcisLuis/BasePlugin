@@ -1,6 +1,5 @@
 package com.gmail.murcisluis.baseplugin.api;
 
-import com.gmail.murcisluis.baseplugin.plugin.BasePlugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BaseAPI {
@@ -25,5 +24,15 @@ public class BaseAPI {
         if (implementation != null) return;
         implementation.disable();
         implementation = null;
+    }
+    public static boolean isRunning() {
+        return implementation!=null;
+    }
+
+    public static Base get() {
+        if (implementation == null) {
+            throw new IllegalStateException("There is no running instance of LujoChatAPI, enabled it first.");
+        }
+        return implementation;
     }
 }

@@ -1,7 +1,5 @@
 package com.gmail.murcisluis.baseplugin.api.commands;
 
-import org.bukkit.command.TabCompleter;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +28,9 @@ public interface CommandBase {
 
     Collection<CommandBase> getSubCommands();
 
+    CommandHandler getCommandHandler();
 
+    TabCompleteHandler getTabCompleteHandler();
 
 
 }

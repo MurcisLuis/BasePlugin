@@ -1,12 +1,12 @@
-package com.gmail.murcisluis.baseplugin.api.utils.color.color;
+package com.gmail.murcisluis.baseplugin.api.utils.color;
 
-import com.gmail.murcisluis.lujochat.api.utils.Common;
-import com.gmail.murcisluis.lujochat.api.utils.color.patterns.GradientPattern;
-import com.gmail.murcisluis.lujochat.api.utils.color.patterns.Pattern;
-import com.gmail.murcisluis.lujochat.api.utils.color.patterns.RainbowPattern;
-import com.gmail.murcisluis.lujochat.api.utils.color.patterns.SolidPattern;
-import com.gmail.murcisluis.lujochat.api.utils.reflect.ReflectMethod;
-import com.gmail.murcisluis.lujochat.api.utils.reflect.Version;
+import com.gmail.murcisluis.baseplugin.api.utils.Common;
+import com.gmail.murcisluis.baseplugin.api.utils.color.patterns.GradientPattern;
+import com.gmail.murcisluis.baseplugin.api.utils.color.patterns.Pattern;
+import com.gmail.murcisluis.baseplugin.api.utils.color.patterns.RainbowPattern;
+import com.gmail.murcisluis.baseplugin.api.utils.color.patterns.SolidPattern;
+import com.gmail.murcisluis.baseplugin.api.utils.reflect.ReflectMethod;
+import com.gmail.murcisluis.baseplugin.api.utils.reflect.Version;
 import com.google.common.collect.ImmutableMap;
 import net.md_5.bungee.api.ChatColor;
 
