@@ -1,4 +1,4 @@
-package com.gmail.murcisluis.baseplugin.commands;
+package com.gmail.murcisluis.baseplugin.plugin.commands;
 
 import com.gmail.murcisluis.baseplugin.api.Lang;
 import com.gmail.murcisluis.baseplugin.api.commands.AbstractCommand;
@@ -20,7 +20,7 @@ public class MyCommand extends AbstractCommand {
     @Override
     public CommandHandler getCommandHandler() {
         return (sender, args) -> {
-            if (sender.hasPermission("dh.admin")) {
+            if (sender.hasPermission(getClass().getAnnotation(CommandInfo.class).permission())) {
                 if (args.length == 0) {
                     Lang.USE_HELP.send(sender);
                     return true;

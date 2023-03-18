@@ -1,4 +1,4 @@
-package com.gmail.murcisluis.baseplugin.commands;
+package com.gmail.murcisluis.baseplugin.plugin.commands;
 
 import com.gmail.murcisluis.baseplugin.api.Lang;
 import com.gmail.murcisluis.baseplugin.api.commands.AbstractCommand;
