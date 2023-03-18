@@ -17,7 +17,7 @@ public class Common {
 
 	private static final Pattern SPACING_CHARS_REGEX = Pattern.compile("[_ \\-]+");
 	public static final Version SERVER_VERSION = Version.valueOf(ReflectionUtil.getVersion());
-	public static String PREFIX = "&8[&3LujoChat&8] &7";
+	public static String PREFIX = "&8[&3BasePlugin&8] &7";
 
 	/*
 	 * 	Colorize
