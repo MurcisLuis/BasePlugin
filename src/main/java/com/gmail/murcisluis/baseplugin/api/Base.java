@@ -2,6 +2,7 @@ package com.gmail.murcisluis.baseplugin.api;
 
 import com.gmail.murcisluis.baseplugin.api.commands.CommandManager;
 import com.gmail.murcisluis.baseplugin.api.utils.Common;
+import com.gmail.murcisluis.baseplugin.api.utils.DExecutor;
 import com.gmail.murcisluis.baseplugin.api.utils.reflect.ReflectionUtil;
 import com.gmail.murcisluis.baseplugin.api.utils.reflect.Version;
 
@@ -38,7 +39,10 @@ public class Base {
         }
     }
     protected void enable() {
-
+        Settings.reload();
+        Lang.reload();
+        DExecutor.init(3);
+        this.commandManager = new CommandManager();
 
     }
     protected void disable() {
@@ -60,5 +64,9 @@ public class Base {
 
     public JavaPlugin getPlugin() {
         return plugin;
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
     }
 }
