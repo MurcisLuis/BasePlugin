@@ -46,6 +46,7 @@ public class Base {
 
     }
     protected void disable() {
+        this.commandManager = null;
 
     }
 
@@ -62,11 +63,4 @@ public class Base {
         return dataFolder;
     }
 
-    public JavaPlugin getPlugin() {
-        return plugin;
-    }
-
-    public CommandManager getCommandManager() {
-        return commandManager;
-    }
 }
