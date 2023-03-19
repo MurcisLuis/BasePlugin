@@ -8,7 +8,8 @@ import com.gmail.murcisluis.baseplugin.api.commands.TabCompleteHandler;
 @CommandInfo(
         permission = "bp.use",
         usage = "/bp <args>",
-        description = "The main command."
+        description = "The main command.",
+        aliases = {"bp","base","plugin"}
 )
 public class MyCommand extends AbstractCommand {
     public MyCommand() {

@@ -51,8 +51,9 @@ public class Base {
 
     }
 
-    public void reload(){
-
+    public void reload() {
+        Settings.reload();
+        Lang.reload();
     }
 
 

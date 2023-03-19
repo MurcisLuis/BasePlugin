@@ -3,8 +3,10 @@ package com.gmail.murcisluis.baseplugin.api;
 import com.gmail.murcisluis.baseplugin.api.utils.Common;
 import com.gmail.murcisluis.baseplugin.api.utils.config.ConfigValue;
 import com.gmail.murcisluis.baseplugin.api.utils.config.Configuration;
+import com.gmail.murcisluis.baseplugin.api.utils.config.FileConfig;
 import com.gmail.murcisluis.baseplugin.api.utils.config.Phrase;
 import com.google.common.collect.Maps;
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.command.CommandSender;
 
@@ -14,8 +16,8 @@ import java.util.Map;
 @UtilityClass
 public class Lang {
 
-	private static final Base LUJO_CHAT = BaseAPI.get();
-	private static final Configuration CONFIG = new Configuration(LUJO_CHAT.getPlugin(), LUJO_CHAT.getDataFolder(), "lang.yml");
+	private static final Base BASE = BaseAPI.get();
+	private static final FileConfig CONFIG = new FileConfig(BASE.getPlugin(), "lang.yml");
 
 	// General
 	public static final Phrase PREFIX = new Phrase(CONFIG, "prefix", Common.PREFIX);
@@ -27,7 +29,7 @@ public class Lang {
 	public static final Phrase USE_HELP = new Phrase(CONFIG, "command.use_help", "{prefix}Use &b/{command.prefix} help&7 to view possible commands.");
 	public static final Phrase COMMAND_USAGE = new Phrase(CONFIG, "command.usage", "{prefix}Usage: &b%1$s");
 	public static final Phrase UNKNOWN_SUB_COMMAND = new Phrase(CONFIG, "command.unknown_sub_command", "{prefix}Unknown sub command.");
-	
+
 	/*
 	 *	General Methods
 	 */
@@ -54,19 +56,20 @@ public class Lang {
 		Common.PREFIX = PREFIX.getValue();
 	}
 
-	public static void sendVersionMessage(CommandSender sender) {
+	public static void sendVersionMessage(@NonNull CommandSender sender) {
 		Common.tell(sender,
-				"\n&fThis server is running &3Decentlujochat v%s&f by &bd0by&f : &7%s",
-				Settings.getAPIVersion(),
-				"https://www.spigotmc.org/resources/96927/"
+				"\n&fThis server is running &3BasePlugin v%s&f by &bd0by&f : &7%s",
+				BaseAPI.get().getPlugin().getDescription().getVersion(),
+				"https://www.spigotmc.org/resources/cambiarEnlaze/"
 		);
 	}
 
-	public static void sendUpdateMessage(CommandSender sender) {
+	public static void sendUpdateMessage(@NonNull CommandSender sender) {
 		Common.tell(sender,
-				"\n&fA newer version of &6LujoChat &fis available. Download it from: &7%s",
-				""
+				"\n&fA newer version of &3DecentHolograms &fis available. Download it from: &7%s",
+				"https://www.spigotmc.org/resources/cambiarEnlaze/"
 		);
 	}
+
 
 }
