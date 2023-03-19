@@ -1,8 +1,7 @@
 package com.gmail.murcisluis.baseplugin.api.utils.reflect;
 
 import lombok.NonNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Enum of supported NMS versions.

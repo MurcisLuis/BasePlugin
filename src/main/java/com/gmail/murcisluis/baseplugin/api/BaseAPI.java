@@ -20,7 +20,7 @@ public class BaseAPI {
     }
 
     public static void onEnable(){
-        if (implementation != null) return;
+        if (implementation == null) return;
         enabled = true;
         implementation.enable();
 
