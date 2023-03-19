@@ -28,7 +28,7 @@ public class BaseAPI {
     }
 
     public static void onDisable(){
-        if (implementation != null) return;
+        if (implementation == null) return;
         implementation.disable();
         implementation = null;
         enabled = false;
