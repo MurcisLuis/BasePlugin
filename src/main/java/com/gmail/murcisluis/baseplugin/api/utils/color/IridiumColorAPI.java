@@ -18,7 +18,6 @@ import java.util.Map;
 
 public class IridiumColorAPI {
 
-    private static final boolean RGB_SUPPORTED = Common.SERVER_VERSION.isAfterOrEqual(Version.v1_16_R1);
     private static final ReflectMethod METHOD_OF = new ReflectMethod(ChatColor.class, "of", Color.class);
     public static final List<String> SPECIAL_COLORS = Arrays.asList("&l", "&n", "&o", "&k", "&m");
 
@@ -90,7 +89,7 @@ public class IridiumColorAPI {
      */
     @Nonnull
     public static String color(@Nonnull String string, @Nonnull Color color) {
-        return (RGB_SUPPORTED ? METHOD_OF.invokeStatic(color) : getClosestColor(color)) + string;
+        return METHOD_OF.invokeStatic(color) + string;
     }
 
     /**
@@ -152,7 +151,7 @@ public class IridiumColorAPI {
      */
     @Nonnull
     public static ChatColor getColor(@Nonnull String string) {
-        return RGB_SUPPORTED ? METHOD_OF.invokeStatic(new Color(Integer.parseInt(string, 16))) : getClosestColor(new Color(Integer.parseInt(string, 16)));
+        return METHOD_OF.invokeStatic(new Color(Integer.parseInt(string, 16)));
     }
 
     /**
@@ -181,11 +180,8 @@ public class IridiumColorAPI {
         double colorStep = (1.00 / step);
         for (int i = 0; i < step; i++) {
             Color color = Color.getHSBColor((float) (colorStep * i), saturation, saturation);
-            if (RGB_SUPPORTED) {
-                colors[i] = METHOD_OF.invokeStatic(color);
-            } else {
-                colors[i] = getClosestColor(color);
-            }
+            colors[i] = METHOD_OF.invokeStatic(color);
+
         }
         return colors;
     }
@@ -213,11 +209,7 @@ public class IridiumColorAPI {
 
         for (int i = 0; i < step; i++) {
             Color color = new Color(start.getRed() + ((stepR * i) * direction[0]), start.getGreen() + ((stepG * i) * direction[1]), start.getBlue() + ((stepB * i) * direction[2]));
-            if (RGB_SUPPORTED) {
-                colors[i] = METHOD_OF.invokeStatic(color);
-            } else {
-                colors[i] = getClosestColor(color);
-            }
+            colors[i] = METHOD_OF.invokeStatic(color);
         }
         return colors;
     }

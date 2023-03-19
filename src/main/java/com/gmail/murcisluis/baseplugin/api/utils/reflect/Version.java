@@ -1,5 +1,12 @@
 package com.gmail.murcisluis.baseplugin.api.utils.reflect;
 
+import lombok.NonNull;
+
+import javax.annotation.Nullable;
+
+/**
+ * Enum of supported NMS versions.
+ */
 public enum Version {
 	v1_8_R1(8),
 	v1_8_R2(8),
@@ -24,29 +31,92 @@ public enum Version {
 	v1_19_R3(19),
 	;
 
-	private final int id;
+	/*
+	 *  Static
+	 */
 
-	Version(int id) {
-		this.id = id;
+	public static final Version CURRENT;
+
+	static {
+		CURRENT = Version.fromString(ReflectionUtil.getVersion());
 	}
 
-	public int getId() {
-		return id;
+	/**
+	 * Parse a Version from string.
+	 *
+	 * @param version The string.
+	 * @return The parsed Version or null.
+	 */
+	@Nullable
+	public static Version fromString(String version) {
+		if (version == null) {
+			return null;
+		}
+
+		for (Version value : Version.values()) {
+			if (value.name().equalsIgnoreCase(version)) {
+				return value;
+			}
+		}
+		return null;
 	}
 
-	public boolean isAfter(Version version) {
-		return this.getId() > version.getId();
+	public static boolean is(int minor) {
+		return CURRENT.getMinor() == minor;
 	}
 
-	public boolean isAfterOrEqual(Version version) {
-		return this.getId() >= version.getId();
+	public static boolean is(@NonNull Version version) {
+		return CURRENT == version;
 	}
 
-	public boolean isBefore(Version version) {
-		return this.getId() < version.getId();
+	public static boolean after(int minor) {
+		return CURRENT.getMinor() > minor;
 	}
 
-	public boolean isBeforeOrEqual(Version version) {
-		return this.getId() <= version.getId();
+	public static boolean after(@NonNull Version version) {
+		return CURRENT.ordinal() > version.ordinal();
 	}
+
+	public static boolean afterOrEqual(int minor) {
+		return CURRENT.getMinor() >= minor;
+	}
+
+	public static boolean afterOrEqual(@NonNull Version version) {
+		return CURRENT.ordinal() >= version.ordinal();
+	}
+
+	public static boolean before(int minor) {
+		return CURRENT.getMinor() < minor;
+	}
+
+	public static boolean before(@NonNull Version version) {
+		return CURRENT.ordinal() < version.ordinal();
+	}
+
+	public static boolean beforeOrEqual(int minor) {
+		return CURRENT.getMinor() <= minor;
+	}
+
+	public static boolean beforeOrEqual(@NonNull Version version) {
+		return CURRENT.ordinal() <= version.ordinal();
+	}
+
+	public static boolean supportsHex() {
+		return afterOrEqual(16);
+	}
+
+	/*
+	 *  Version
+	 */
+
+	private final int minor;
+
+	Version(int minor) {
+		this.minor = minor;
+	}
+
+	public int getMinor() {
+		return minor;
+	}
+
 }
