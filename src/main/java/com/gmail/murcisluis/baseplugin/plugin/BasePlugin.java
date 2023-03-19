@@ -17,10 +17,11 @@ public final class BasePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        BaseAPI.onEnable();
         Base base = BaseAPI.get();
 
-        BaseAPI.onEnable();
         CommandManager commandManager = base.getCommandManager();
+
         AbstractCommand mainCommand= new MyCommand();
         commandManager.setMainCommand(mainCommand);
         commandManager.registerCommand(mainCommand);

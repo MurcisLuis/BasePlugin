@@ -42,6 +42,7 @@ public class Base {
         Settings.reload();
         Lang.reload();
         DExecutor.init(3);
+
         this.commandManager = new CommandManager();
 
     }
