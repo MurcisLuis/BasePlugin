@@ -74,7 +74,7 @@ public class CommandManager {
         if (command == null) return;
         SimpleCommandMap commandMap = GET_COMMAND_MAP_METHOD.invoke(BaseAPI.get().getPlugin().getServer());
         CommandManager.unregister(command);
-        commandMap.register("DecentHolograms", command);
+        commandMap.register("BasePlugin", command);
     }
 
     public static void unregister(Command command) {
