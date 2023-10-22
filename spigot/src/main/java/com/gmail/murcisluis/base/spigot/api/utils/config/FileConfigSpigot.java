@@ -74,7 +74,7 @@ public class FileConfigSpigot extends YamlConfiguration implements FileConfig<Co
      * @param file The file to load. Must be a .yml file.
      * @param configuration The pre-existing YamlConfiguration.
      */
-    public FileConfigSpigot(@NotNull BasePlugin plugin, @NotNull File file, @NotNull YamlConfiguration configuration) {
+    public FileConfigSpigot(@NotNull BasePlugin plugin, File file, @NotNull YamlConfiguration configuration) {
         this.plugin = plugin;
         this.path = file.getName();
         this.file = file;

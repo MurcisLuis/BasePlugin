@@ -20,9 +20,11 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.logging.Level;
 
 @Getter
@@ -83,7 +85,14 @@ public class BaseSpigot extends Base {
 
     @Override
     public FileConfig<?> getFileConfig(String path) {
-        return new FileConfigSpigot(getPlugin(),path);
+
+        if (path.isEmpty()) {
+            return new FileConfigSpigot(getPlugin(),null,new YamlConfiguration());
+        }else{
+            return new FileConfigSpigot(getPlugin(),path);
+
+        }
+
     }
 
     @Override

@@ -16,9 +16,8 @@ import net.kyori.adventure.platform.bungeecord.BungeeAudiences;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
+import net.md_5.bungee.config.Configuration;
 
-
-import java.util.logging.Level;
 @Getter
 public class BaseBungee extends Base {
     private CommandManagerBungee commandManager;
@@ -42,7 +41,6 @@ public class BaseBungee extends Base {
         Lang.reload();
         DExecutor.init(3);
         this.audience= BungeeAudiences.create((Plugin) plugin);
-
         this.commandManager = new CommandManagerBungee();
 
     }
@@ -80,9 +78,15 @@ public class BaseBungee extends Base {
         return message;
     }
 
-    @Override
     public FileConfig<?> getFileConfig(String path) {
-        return new FileConfigBungee(getPlugin(),path);
+
+        if (path.isEmpty()) {
+            return new FileConfigBungee(path,new Configuration());
+        }else{
+            return new FileConfigBungee(getPlugin(),path);
+
+        }
+
     }
 
     @Override

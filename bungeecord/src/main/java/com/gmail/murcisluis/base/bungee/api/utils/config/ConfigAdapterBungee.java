@@ -1,5 +1,6 @@
 package com.gmail.murcisluis.base.bungee.api.utils.config;
 
+import com.gmail.murcisluis.base.common.api.utils.Common;
 import com.gmail.murcisluis.base.common.api.utils.config.ConfigAdapter;
 import com.gmail.murcisluis.base.common.api.utils.config.FileConfig;
 import net.md_5.bungee.config.Configuration;
@@ -22,10 +23,9 @@ public class ConfigAdapterBungee extends ConfigAdapter {
         Configuration configuration = null;
         try {
             configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(file);
-
+            return new FileConfigBungee(file.getName(),configuration);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new FileConfigBungee(file.getPath(),configuration);
     }
 }

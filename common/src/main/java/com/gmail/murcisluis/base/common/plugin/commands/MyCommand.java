@@ -6,12 +6,6 @@ import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
 import com.gmail.murcisluis.base.common.api.Lang;
 import com.gmail.murcisluis.base.common.api.commands.TabCompleteHandler;
 
-@CommandInfo(
-        permission = "bp.use",
-        usage = "/bp <args>",
-        description = "The main command.",
-        aliases = {"bp","base","plugin"}
-)
 public interface MyCommand<T>  extends CommandBase {
 
     @Override

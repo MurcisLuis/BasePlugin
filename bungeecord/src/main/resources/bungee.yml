@@ -1,8 +1,8 @@
 name: BasePlugin
-version: '${project.version}'
+version: '${version}'
 main: com.gmail.murcisluis.base.bungee.plugin.BaseBungeePlugin
 api-version: 1.13
-authors: [ Murcis_Luis ]
+author: 'Murcis_Luis'
 description: A base plugin
 
 permissions:

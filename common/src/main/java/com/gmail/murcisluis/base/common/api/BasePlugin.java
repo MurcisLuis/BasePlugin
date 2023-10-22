@@ -1,6 +1,5 @@
 package com.gmail.murcisluis.base.common.api;
 
-import com.gmail.murcisluis.base.common.api.utils.Common;
 import com.gmail.murcisluis.base.common.api.utils.config.ConfigAdapter;
 
 import java.io.File;

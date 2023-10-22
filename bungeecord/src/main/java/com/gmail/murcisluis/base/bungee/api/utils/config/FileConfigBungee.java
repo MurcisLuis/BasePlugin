@@ -44,14 +44,13 @@ public class FileConfigBungee implements FileConfig<Configuration> {
         this.path = path;
         this.file = new File(plugin.getDataFolder(), path);
         this.configuration = configuration;
+        if (path.isEmpty()) return;
         this.createFile();
     }
 
     public void createFile() {
         if (!file.exists()) {
             plugin.getDataFolder().mkdirs();
-
-            // Try to save from resources first
             try (InputStream in = plugin.getResourceAsStream(path)) {
                 if (in == null) {
                     file.createNewFile();
