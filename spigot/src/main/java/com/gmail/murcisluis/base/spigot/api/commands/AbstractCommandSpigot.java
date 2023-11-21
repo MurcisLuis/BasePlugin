@@ -3,17 +3,18 @@ package com.gmail.murcisluis.base.spigot.api.commands;
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
 import com.gmail.murcisluis.base.common.api.commands.AbstractCommand;
 import com.gmail.murcisluis.base.common.api.commands.CommandBase;
-import com.gmail.murcisluis.base.spigot.api.BaseSpigotAPI;
+import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
 import com.gmail.murcisluis.base.spigot.api.BaseSpigot;
-import com.gmail.murcisluis.base.common.api.Lang;
 import com.gmail.murcisluis.base.common.api.exception.AbstractCommandException;
 import com.gmail.murcisluis.base.common.api.utils.Common;
+import com.gmail.murcisluis.base.spigot.api.Lang;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.apache.commons.lang3.Validate;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -43,10 +44,8 @@ public abstract class AbstractCommandSpigot extends Command implements CommandBa
     public Collection<CommandBase> getSubCommands() {
         return subCommands.values();
     }
-
     @Override
-    public CommandBase getSubCommand(String name) {
-        Validate.notNull(name);
+    public CommandBase getSubCommand(@NotNull String name) {
         return subCommands.get(name);
     }
 
@@ -74,7 +73,6 @@ public abstract class AbstractCommandSpigot extends Command implements CommandBa
      * @param args The arguments.
      * @return List of tab completed Strings.
      */
-    @Deprecated
     protected final List<String> handeTabComplete(CommandSender sender, String[] args) {
         return handleTabComplete(sender, args);
     }
@@ -130,7 +128,7 @@ public abstract class AbstractCommandSpigot extends Command implements CommandBa
                         Lang.COMMAND_USAGE.send(sender, Placeholder.parsed("usage", subCommand.getUsage()), Placeholder.parsed("description", subCommand.getDescription()));
                         return true;
                     }
-                    return ((AbstractCommand) subCommand).handle(sender, subCommandArgs);
+                    return ((AbstractCommandSpigot) subCommand).handle(sender, subCommandArgs);
                 }
             }
         } else if (getMinArgs() > 0) {
@@ -174,7 +172,7 @@ public abstract class AbstractCommandSpigot extends Command implements CommandBa
         } else if (args.length > 1) {
             for (CommandBase subCommand : getSubCommands()) {
                 if (CommandValidator.isIdentifier(args[0], subCommand)) {
-                    return ((AbstractCommand) subCommand).handleTabComplete(sender, Arrays.copyOfRange(args, 1, args.length));
+                    return ((AbstractCommandSpigot) subCommand).handleTabComplete(sender, Arrays.copyOfRange(args, 1, args.length));
                 }
             }
         }

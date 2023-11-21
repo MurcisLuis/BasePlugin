@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+configurations {
+    resolvedImplementation.extendsFrom implementation
+}
+
+dependencies {
+    implementation project(':common')
+    compileOnly 'net.md-5:bungeecord-api:1.16-R0.4'
+    implementation 'net.kyori:adventure-platform-bungeecord:4.3.1'
+}
+
+tasks {
+    jar {
+        enabled = false
+    }
+    shadowJar {
+        configurations = [project.configurations.runtimeClasspath]
+        minimize()
+    }
+    processResources {
+        mustRunAfter 'compileJava'
+        filesMatching(["plugin.yml", "bungee.yml"]) {
+            expand(version: project.version, displayName: project.property("name"))
+        }
+    }
+    shadowJar.dependsOn subprojects*.tasks*.withType(JavaCompile)
+}

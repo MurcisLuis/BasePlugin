@@ -1,6 +1,7 @@
 package com.gmail.murcisluis.base.bungee.plugin;
 
 import com.gmail.murcisluis.base.bungee.api.utils.config.ConfigAdapterBungee;
+import com.gmail.murcisluis.base.bungee.api.utils.scheduler.SchedulerBungeecord;
 import com.gmail.murcisluis.base.common.api.BasePlugin;
 import com.gmail.murcisluis.base.common.api.Description;
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
@@ -10,6 +11,7 @@ import com.gmail.murcisluis.base.bungee.api.commands.AbstractCommandBungee;
 import com.gmail.murcisluis.base.bungee.api.commands.CommandManagerBungee;
 import com.gmail.murcisluis.base.bungee.plugin.commands.MyCommandBungee;
 import com.gmail.murcisluis.base.common.api.utils.config.ConfigAdapter;
+import com.gmail.murcisluis.base.common.api.utils.scheduler.S;
 import lombok.Getter;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -31,6 +33,8 @@ public class BaseBungeePlugin extends Plugin implements BasePlugin {
         configAdapter=new ConfigAdapterBungee();
         BaseAPIFactory.initialize(new BaseBungeAPI());
         BaseAPIFactory.getAPI().onLoad(this);
+        S.setInstance(new SchedulerBungeecord());
+
     }
     @Override
     public void onEnable() {

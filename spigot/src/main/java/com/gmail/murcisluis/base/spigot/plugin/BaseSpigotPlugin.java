@@ -2,6 +2,7 @@ package com.gmail.murcisluis.base.spigot.plugin;
 
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
 import com.gmail.murcisluis.base.common.api.utils.config.ConfigAdapter;
+import com.gmail.murcisluis.base.common.api.utils.scheduler.S;
 import com.gmail.murcisluis.base.spigot.api.BaseSpigotAPI;
 import com.gmail.murcisluis.base.spigot.api.commands.AbstractCommandSpigot;
 import com.gmail.murcisluis.base.spigot.api.commands.CommandManagerSpigot;
@@ -33,6 +34,7 @@ public final class BaseSpigotPlugin extends JavaPlugin implements BasePlugin {
     public void onEnable() {
         // Plugin startup logic
         BaseAPIFactory.getAPI().onEnable();
+        S.setInstance(new SchedulerSpigot());
         BaseSpigot base = (BaseSpigot) BaseAPIFactory.get();
 
         CommandManagerSpigot commandManager = base.getCommandManager();

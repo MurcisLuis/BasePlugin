@@ -1,6 +1,6 @@
 name: BasePlugin
 version: '${version}'
-main: com.gmail.murcisluis.base.spigot.plugin.BasePlugin
+main: com.gmail.murcisluis.base.spigot.plugin.BaseSpigotPlugin
 api-version: 1.13
 authors: [ Murcis_Luis ]
 description: A base plugin

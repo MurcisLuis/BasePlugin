@@ -35,6 +35,7 @@ public interface FileConfig<T>{
 
     abstract boolean contains(String path);
     abstract Object get(String path);
+    abstract Object get(String path,Object defaultvalue);
     abstract void set(String path,Object memo);
 
 

@@ -2,8 +2,9 @@ package com.gmail.murcisluis.base.bungee.api.commands;
 
 
 
-import com.gmail.murcisluis.base.common.api.Lang;
+
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
+import com.gmail.murcisluis.base.common.api.Lang;
 import com.gmail.murcisluis.base.common.api.commands.CommandBase;
 import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
 import com.gmail.murcisluis.base.common.api.exception.AbstractCommandException;
@@ -14,11 +15,12 @@ import com.google.common.collect.Lists;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.api.plugin.TabExecutor;
 import org.apache.commons.lang3.Validate;
 
 import java.util.*;
 
-public abstract class AbstractCommandBungee extends Command implements CommandBaseBungee {
+public abstract class AbstractCommandBungee extends Command implements CommandBaseBungee, TabExecutor {
 
     protected static final BaseBungee PLUGIN = (BaseBungee) BaseAPIFactory.get();
     protected final Map<String, CommandBase> subCommands = new LinkedHashMap<>();
@@ -30,7 +32,6 @@ public abstract class AbstractCommandBungee extends Command implements CommandBa
         if (info == null) {
             throw new RuntimeException(String.format("Command %s is not annotated with @CommandInfo.", name));
         }
-
     }
 
     private static String[] getAliasesFromAnnotation(String name) {
@@ -153,7 +154,8 @@ public abstract class AbstractCommandBungee extends Command implements CommandBa
             Lang.COMMAND_USAGE.send(sender, Placeholder.parsed("name", command.getName()),
                     Placeholder.parsed("aliases", command.getAliasesL().size() > 1
                             ? ", " + String.join(", ", command.getAliasesL())
-                            : ""));
+                            : ""),
+                    Placeholder.parsed("commandprefix",getName()));
             return false;
         }
 
@@ -199,7 +201,10 @@ public abstract class AbstractCommandBungee extends Command implements CommandBa
 
         return this.getTabCompleteHandler().handleTabComplete(sender, args);
     }
-
+    @Override
+    public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
+        return handleTabComplete(sender, args);
+    }
     @Override
     public List<String> getAliasesL() {
         return List.of(getAliases());
