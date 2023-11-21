@@ -7,6 +7,7 @@ import com.gmail.murcisluis.base.spigot.api.BaseSpigotAPI;
 import com.gmail.murcisluis.base.spigot.api.commands.AbstractCommandSpigot;
 import com.gmail.murcisluis.base.spigot.api.commands.CommandManagerSpigot;
 import com.gmail.murcisluis.base.spigot.api.utils.config.ConfigAdapterSpigot;
+import com.gmail.murcisluis.base.spigot.api.utils.scheduler.SchedulerSpigot;
 import com.gmail.murcisluis.base.spigot.plugin.commands.MyCommandSpigot;
 import com.gmail.murcisluis.base.common.api.BasePlugin;
 import com.gmail.murcisluis.base.common.api.Description;
