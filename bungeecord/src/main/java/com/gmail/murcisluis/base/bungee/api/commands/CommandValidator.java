@@ -1,6 +1,6 @@
 package com.gmail.murcisluis.base.bungee.api.commands;
 
-import com.gmail.murcisluis.base.common.api.Lang;
+import com.gmail.murcisluis.base.bungee.api.Lang;
 import com.gmail.murcisluis.base.common.api.commands.CommandBase;
 import lombok.experimental.UtilityClass;
 import net.md_5.bungee.api.CommandSender;

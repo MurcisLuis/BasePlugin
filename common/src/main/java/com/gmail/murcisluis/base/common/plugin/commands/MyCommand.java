@@ -2,22 +2,27 @@ package com.gmail.murcisluis.base.common.plugin.commands;
 
 import com.gmail.murcisluis.base.common.api.commands.CommandBase;
 import com.gmail.murcisluis.base.common.api.commands.CommandHandler;
-import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
-import com.gmail.murcisluis.base.common.api.Lang;
 import com.gmail.murcisluis.base.common.api.commands.TabCompleteHandler;
+import com.gmail.murcisluis.base.common.api.utils.config.Phrase;
 
-public interface MyCommand<T>  extends CommandBase {
+public interface MyCommand<T> extends CommandBase {
+
+    Phrase getHelp();
+    Phrase getUnknownSubCommand();
+    void sendVersion(T sender);
+
+
 
     @Override
     default CommandHandler<T> getCommandHandler() {
         return (sender, args) -> {
             if (args.length == 0) {
-                Lang.USE_HELP.send(sender);
+                getHelp().send(sender);
                 return true;
             }
-            Lang.UNKNOWN_SUB_COMMAND.send(sender);
-            Lang.USE_HELP.send(sender);
-            Lang.sendVersionMessage(sender);
+            getUnknownSubCommand().send(sender);
+            getHelp().send(sender);
+            sendVersion(sender);
             return true;
         };
     }
@@ -26,5 +31,7 @@ public interface MyCommand<T>  extends CommandBase {
     default TabCompleteHandler<T> getTabCompleteHandler() {
         return null;
     }
+
+
 
 }

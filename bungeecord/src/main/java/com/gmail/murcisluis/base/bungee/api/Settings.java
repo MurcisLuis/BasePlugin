@@ -31,19 +31,19 @@ public class Settings {
 
     private static final Map<String, ConfigValue<?>> VALUES = Maps.newHashMap();
 
-    static {  // Bloque de inicialización estática
+    static {  // Bloque de inicializaci?n est?tica
         try {
             Field[] fields = Settings.class.getDeclaredFields();
             for (Field field : fields) {
                 if (field.isAnnotationPresent(Key.class)) {
                     field.setAccessible(true);
                     String key = field.getAnnotation(Key.class).value();
-                    Object defaultValue = field.get(null);  // Asumiendo que todos los campos son estáticos
+                    Object defaultValue = field.get(null);  // Asumiendo que todos los campos son est?ticos
                     CONFIG.set(key, CONFIG.get(key, defaultValue));  // Establece el valor predeterminado si no existe
                     VALUES.put(key, new ConfigValue<>(CONFIG, key, defaultValue));
                 }
             }
-            CONFIG.saveData();  // Guarda la configuración en el archivo
+            CONFIG.saveData();  // Guarda la configuraci?n en el archivo
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -55,8 +55,7 @@ public class Settings {
     public static void reload() {
         CONFIG.reload();
         VALUES.values().forEach(ConfigValue::updateValue);
-        CFG.load(BASE.getPlugin(), Settings.class, CONFIG.getFile());
-
+        //CFG.load(BASE.getPlugin(), Settings.class, CONFIG.getFile());
     }
 
     public static FileConfig getConfig() {

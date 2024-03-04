@@ -36,7 +36,7 @@ public final class BaseSpigotAPI implements BaseAPI {
     @Override
     public BaseSpigot get() {
         if (implementation == null) {
-            throw new IllegalStateException("No hay una instancia en ejecución de BaseSpigotAPI, habilítela primero.");
+            throw new IllegalStateException("No hay una instancia en ejecuci?n de BaseSpigotAPI, habil?tela primero.");
         }
         return implementation;
     }

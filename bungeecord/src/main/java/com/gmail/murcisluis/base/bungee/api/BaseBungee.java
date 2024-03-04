@@ -5,8 +5,6 @@ import com.gmail.murcisluis.base.bungee.api.utils.config.FileConfigBungee;
 import com.gmail.murcisluis.base.bungee.plugin.BaseBungeePlugin;
 import com.gmail.murcisluis.base.common.api.Base;
 import com.gmail.murcisluis.base.common.api.BasePlugin;
-import com.gmail.murcisluis.base.common.api.Lang;
-import com.gmail.murcisluis.base.common.api.Settings;
 import com.gmail.murcisluis.base.common.api.utils.DExecutor;
 import com.gmail.murcisluis.base.common.api.utils.config.FileConfig;
 

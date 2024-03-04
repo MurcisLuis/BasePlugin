@@ -59,7 +59,7 @@ public class Lang {
 
 	public static <T> void sendVersionMessage(@NonNull T sender) {
 		Common.tell(sender,
-				"\n&fThis server is running &3LujoKarts v<v>&f by <aqua>d0by&f : &7<link>",
+				"\n&fThis server is running &3LujoEmotes v<v>&f by <aqua>Murcis_Luis&f : &7<link>",
 				Placeholder.parsed("v", BaseAPIFactory.getPlugin().getPluginDescription().getVersion()) ,
 				Placeholder.parsed("link","https://cambiarEnlaze/")
 		);

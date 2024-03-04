@@ -5,12 +5,16 @@ import com.gmail.murcisluis.base.common.api.utils.Common;
 import com.gmail.murcisluis.base.common.api.utils.config.FileConfig;
 import lombok.Getter;
 import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -125,8 +129,12 @@ public class FileConfigSpigot extends YamlConfiguration implements FileConfig<Co
     public void reload() {
         try {
             this.load(file);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            // Manejar excepción de tipo IOException
+            Common.log(Level.SEVERE, "Error de E/S al recargar la configuraci?n: %s", e.getMessage());
+        } catch (InvalidConfigurationException e) {
+            // Manejar excepción de tipo InvalidConfigurationException
+            Common.log(Level.SEVERE, "Error de configuraci?n inv?lida al recargar la configuraci?n: %s", e.getMessage());
         }
     }
 
@@ -151,5 +159,106 @@ public class FileConfigSpigot extends YamlConfiguration implements FileConfig<Co
         return null;
     }
 
+    @Override
+    public String getString(String path) {
+        return super.getString(path);
+    }
+
+    @Override
+    public String getString(String path, String defaultValue) {
+        return super.getString(path, defaultValue);
+    }
+
+    @Override
+    public int getInt(String path) {
+        return super.getInt(path);
+    }
+
+    @Override
+    public int getInt(String path, int defaultValue) {
+        return super.getInt(path, defaultValue);
+    }
+
+    @Override
+    public boolean getBoolean(String path) {
+        return super.getBoolean(path);
+    }
+
+    @Override
+    public boolean getBoolean(String path, boolean defaultValue) {
+        return super.getBoolean(path, defaultValue);
+    }
+
+    @Override
+    public double getDouble(String path) {
+        return super.getDouble(path);
+    }
+
+    @Override
+    public double getDouble(String path, double defaultValue) {
+        return super.getDouble(path, defaultValue);
+    }
+
+    @Override
+    public long getLong(String path) {
+        return super.getLong(path);
+    }
+
+    @Override
+    public long getLong(String path, long defaultValue) {
+        return super.getLong(path, defaultValue);
+    }
+
+    @Override
+    public List<?> getList(String path) {
+        return super.getList(path);
+    }
+
+    @Override
+    public List<?> getList(String path, List<?> defaultValue) {
+        return super.getList(path, defaultValue);
+    }
+
+    @Override
+    public List<String> getStringList(String path) {
+        return super.getStringList(path);
+    }
+
+    @Override
+    public List<Integer> getIntegerList(String path) {
+        return super.getIntegerList(path);
+    }
+
+    @Override
+    public List<Double> getDoubleList(String path) {
+        return super.getDoubleList(path);
+    }
+
+    @Override
+    public List<Boolean> getBooleanList(String path) {
+        return super.getBooleanList(path);
+    }
+
+    @Override
+    public List<Long> getLongList(String path) {
+        return super.getLongList(path);
+    }
+
+    @Override
+    public FileConfig<ConfigurationSection> getSection(String path) {
+        return (FileConfig<ConfigurationSection>) super.getConfigurationSection(path);
+    }
+
+    @Override
+    public Set<String> getKeys(boolean deep) {
+        return super.getKeys(deep);
+    }
+
+    @Override
+    public void setSectionConfig(String path,Map<String, Object> configMap) {
+        for (Map.Entry<String, Object> entry : configMap.entrySet()) {
+            this.set(path +"."+entry.getKey(), entry.getValue());
+        }
+    }
 
 }

@@ -1,7 +1,7 @@
 package com.gmail.murcisluis.base.spigot.api.commands;
 
-import com.gmail.murcisluis.base.common.api.Lang;
 import com.gmail.murcisluis.base.common.api.commands.CommandBase;
+import com.gmail.murcisluis.base.spigot.api.Lang;
 import lombok.experimental.UtilityClass;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

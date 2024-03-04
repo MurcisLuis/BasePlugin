@@ -14,6 +14,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 
 @Getter
@@ -113,7 +116,114 @@ public class FileConfigBungee implements FileConfig<Configuration> {
     }
 
     @Override
+    public Object get(String path, Object defaultvalue) {
+        return configuration.get(path,defaultvalue);
+    }
+
+    @Override
     public void set(String path, Object value) {
         configuration.set(path, value);
     }
+
+    @Override
+    public String getString(String path) {
+        return configuration.getString(path);
+    }
+
+    @Override
+    public String getString(String path, String defaultValue) {
+        return configuration.getString(path, defaultValue);
+    }
+
+    @Override
+    public int getInt(String path) {
+        return configuration.getInt(path);
+    }
+
+    @Override
+    public int getInt(String path, int defaultValue) {
+        return configuration.getInt(path, defaultValue);
+    }
+
+    @Override
+    public boolean getBoolean(String path) {
+        return configuration.getBoolean(path);
+    }
+
+    @Override
+    public boolean getBoolean(String path, boolean defaultValue) {
+        return configuration.getBoolean(path, defaultValue);
+    }
+
+    @Override
+    public double getDouble(String path) {
+        return configuration.getDouble(path);
+    }
+
+    @Override
+    public double getDouble(String path, double defaultValue) {
+        return configuration.getDouble(path, defaultValue);
+    }
+
+    @Override
+    public long getLong(String path) {
+        return configuration.getLong(path);
+    }
+
+    @Override
+    public long getLong(String path, long defaultValue) {
+        return configuration.getLong(path, defaultValue);
+    }
+
+    @Override
+    public List<?> getList(String path) {
+        return configuration.getList(path);
+    }
+
+    @Override
+    public List<?> getList(String path, List<?> defaultValue) {
+        return configuration.getList(path, defaultValue);
+    }
+
+    @Override
+    public List<String> getStringList(String path) {
+        return configuration.getStringList(path);
+    }
+
+    @Override
+    public List<Integer> getIntegerList(String path) {
+        return configuration.getIntList(path);
+    }
+
+    @Override
+    public List<Double> getDoubleList(String path) {
+        return configuration.getDoubleList(path);
+    }
+
+    @Override
+    public List<Boolean> getBooleanList(String path) {
+        return configuration.getBooleanList(path);
+    }
+
+    @Override
+    public List<Long> getLongList(String path) {
+        return configuration.getLongList(path);
+    }
+
+    // Método para obtener secciones de configuración, si es necesario
+    @Override
+    public FileConfig<?> getSection(String path) {
+        Configuration section = configuration.getSection(path);
+        return section == null ? null : new FileConfigBungee(path, section);
+    }
+
+    @Override
+    public void setSectionConfig(String path,Map<String, Object> configMap) {
+        for (Map.Entry<String, Object> entry : configMap.entrySet()) {
+            this.set(path +"."+ entry.getKey(), entry.getValue());
+            this.saveData();
+        }
+         // Save changes to the file
+    }
+
 }

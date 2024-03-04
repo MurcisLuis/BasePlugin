@@ -1,15 +1,10 @@
-name: BasePlugin
+name: '${displayName}'
 version: '${version}'
 main: com.gmail.murcisluis.base.spigot.plugin.BaseSpigotPlugin
-api-version: 1.13
+api-version: 1.16
 authors: [ Murcis_Luis ]
 description: A base plugin
+depend:
+  - MythicMobs
 softdepend:
   - PlaceholderAPI
-
-permissions:
-  bp.admin:
-    description: Allow player to use admin commands
-  bp.use:
-    default: true
-    description: Allow player to use default permissions
