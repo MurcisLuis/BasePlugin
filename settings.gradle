@@ -1,0 +1,3 @@
+rootProject.name = 'BasePlugin'
+
+include 'common', 'spigot', 'bungeecord'
