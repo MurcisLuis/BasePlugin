@@ -1,13 +1,11 @@
 package com.gmail.murcisluis.base.bungee.plugin.commands;
 
-import com.gmail.murcisluis.base.bungee.api.Lang;
 import com.gmail.murcisluis.base.bungee.api.commands.AbstractCommandBungee;
 import com.gmail.murcisluis.base.bungee.api.commands.CommandBaseBungee;
 import com.gmail.murcisluis.base.bungee.api.commands.CommandHandlerBungee;
 import com.gmail.murcisluis.base.bungee.api.commands.TabCompleteHandlerBungee;
 import com.gmail.murcisluis.base.common.api.commands.CommandHandler;
 import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
-import com.gmail.murcisluis.base.common.api.utils.config.Phrase;
 import com.gmail.murcisluis.base.common.plugin.commands.MyCommand;
 import net.md_5.bungee.api.CommandSender;
 @CommandInfo(
@@ -20,21 +18,6 @@ public class MyCommandBungee extends AbstractCommandBungee implements CommandBas
 
     public MyCommandBungee() {
         super("bbase");
-    }
-
-    @Override
-    public Phrase getHelp() {
-        return Lang.USE_HELP;
-    }
-
-    @Override
-    public Phrase getUnknownSubCommand() {
-        return Lang.UNKNOWN_SUB_COMMAND;
-    }
-
-    @Override
-    public void sendVersion(CommandSender sender) {
-        Lang.sendVersionMessage(sender);
     }
 
     @Override

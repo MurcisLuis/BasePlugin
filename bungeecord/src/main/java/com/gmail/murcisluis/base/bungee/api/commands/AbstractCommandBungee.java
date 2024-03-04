@@ -3,8 +3,8 @@ package com.gmail.murcisluis.base.bungee.api.commands;
 
 
 
-import com.gmail.murcisluis.base.bungee.api.Lang;
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
+import com.gmail.murcisluis.base.common.api.Lang;
 import com.gmail.murcisluis.base.common.api.commands.CommandBase;
 import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
 import com.gmail.murcisluis.base.common.api.exception.AbstractCommandException;
@@ -35,6 +35,8 @@ public abstract class AbstractCommandBungee extends Command implements CommandBa
     }
 
     private static String[] getAliasesFromAnnotation(String name) {
+        // Obtén la anotación CommandInfo de la clase correspondiente usando reflection.
+        // Esto es un ejemplo simplificado, es posible que necesites ajustarlo para tu configuración específica.
         CommandInfo commandInfo = null;
         try {
             commandInfo = Class.forName(name).getAnnotation(CommandInfo.class);
@@ -44,6 +46,8 @@ public abstract class AbstractCommandBungee extends Command implements CommandBa
     }
 
     private static String getPermission(String name) {
+        // Obtén la anotación CommandInfo de la clase correspondiente usando reflection.
+        // Esto es un ejemplo simplificado, es posible que necesites ajustarlo para tu configuración específica.
         CommandInfo commandInfo = null;
         try {
             commandInfo = Class.forName(name).getAnnotation(CommandInfo.class);

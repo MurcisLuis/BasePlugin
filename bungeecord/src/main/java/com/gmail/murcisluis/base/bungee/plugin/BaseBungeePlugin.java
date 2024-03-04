@@ -73,7 +73,7 @@ public class BaseBungeePlugin extends Plugin implements BasePlugin {
             Files.createDirectories(outputPath.getParent());  // Asegurar que los directorios existan
             Files.copy(in, outputPath, StandardCopyOption.REPLACE_EXISTING);  // Copia el recurso al archivo de salida, reemplazando si es necesario
         } catch (IOException e) {
-            e.printStackTrace();  // Manejar la excepci?n como lo desees, aqu? solo se imprime la traza del error
+            e.printStackTrace();  // Manejar la excepción como lo desees, aquí solo se imprime la traza del error
         }
     }
 

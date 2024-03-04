@@ -21,7 +21,7 @@ public class PAPI {
 	public static String setPlaceholders(Player player, String string) {
 		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 			try {
-				return PlaceholderAPI.setPlaceholders(player, string.replace("&", "?")).replace("?", "&");
+				return PlaceholderAPI.setPlaceholders(player, string.replace("&", "§")).replace("§", "&");
 			} catch (Exception ignored) {
 			}
 		}

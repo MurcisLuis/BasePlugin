@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class Common {
 
 	private static final Pattern SPACING_CHARS_REGEX = Pattern.compile("[_ \\-]+");
-	public static String PREFIX = "&8[&3LujoEmotes&8] &7";
+	public static String PREFIX = "&8[&3BasePlugin&8] &7";
 
 	private static final Map<Character, String> legacyColorsToMiniMessage = new HashMap<>();
 

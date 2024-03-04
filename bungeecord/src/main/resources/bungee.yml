@@ -1,4 +1,4 @@
-name: '${displayName}'
+name: BasePlugin
 version: '${version}'
 main: com.gmail.murcisluis.base.bungee.plugin.BaseBungeePlugin
 api-version: 1.13

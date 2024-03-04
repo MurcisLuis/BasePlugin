@@ -1,13 +1,3 @@
-buildscript {
-    repositories{
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.guardsquare:proguard-gradle:7.4.2'
-
-    }
-}
-
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
@@ -26,23 +16,14 @@ allprojects {
         maven { url 'https://jitpack.io' }
         maven { url 'https://repo.codemc.io/repository/maven-snapshots/' }
         maven { url 'https://repo.alessiodp.com/releases/'}
-        maven { url 'https://mvn.lumine.io/repository/maven-public/' }
-
-
     }
 
+
 }
-
-
-
-
-
-
 
 subprojects {
     apply plugin: 'java'
     apply plugin: 'com.github.johnrengelman.shadow'
-
 
     dependencies {
         implementation  'org.apache.commons:commons-lang3:3.13.0'
@@ -59,7 +40,7 @@ subprojects {
     tasks.processResources {
         mustRunAfter 'compileJava'
         doFirst {
-            println "project - Expanding with displayName: ${project.property("name")}"
+            println " project - Expanding with displayName: ${project.property("name")}"
         }
         filesMatching(["plugin.yml", "bungee.yml"]) {
             expand(version: (parent?.version ?: project.version), displayName: rootProject.ext.displayName)
@@ -69,122 +50,47 @@ subprojects {
     compileJava {
         options.annotationProcessorPath = configurations.annotationProcessor
     }
+}
 
-    task convertStringsToUnicode {
-        doLast {
-            // Iterar directamente sobre subprojects
-            println "Procesando proyecto: ${project.name}"
-            // Ajusta la ruta si es necesario para tu estructura de proyecto
-            fileTree("${project.projectDir}").forEach { file ->
-                try {
-                    // Ignorar el archivo Metrics.java
-                    if (file.name.endsWith('.java') && !file.name.equals('Metrics.java')) {
-                        println "Procesando archivo: ${file}"
-                        String content = new String(file.bytes, 'UTF-8')
-                        // Conversión de contenido del archivo
-                        String convertedContent = content.replaceAll(/"([^"]*)"/) { match ->
-                            '"' + match[1].collect { c -> String.format('\\u%04x', (int)c.charAt(0)) }.join('') + '"'
-                        }
-                        if (content != convertedContent) {
-                            println "Modificando archivo: ${file}"
-                            file.setText(convertedContent, 'UTF-8')
-                        }
-                    }
-                } catch (Exception e) {
-                    println "Error procesando archivo ${file}: ${e.message}"
-                }
-            }
+// ... (tu código existente hasta processResources)
 
-        }
-        outputs.upToDateWhen { false } // Asegurar que la tarea se ejecute siempre
-    }
-
-    task revertStringsFromUnicode {
-        doLast {
-            println "Procesando módulo: ${project.name}"
-            fileTree("${project.projectDir}").each { file ->
-                if (file.name.endsWith('.java')) {
-                    println "Procesando archivo: ${file}"
-                    String content = file.text
-                    // Revertir la conversión de contenido del archivo
-                    String revertedContent = content.replaceAll(/\\u([0-9A-Fa-f]{4})/) { match, code ->
-                        return Character.toChars(Integer.parseInt(code, 16)) as String
-
-                    }
-                    if (content != revertedContent) {
-                        println "Modificando archivo: ${file}"
-                        file.text = revertedContent
-                    }
-                }
-            }
-
-        }
-        outputs.upToDateWhen { false } // Asegura que la tarea se ejecute siempre
+processResources {
+    mustRunAfter 'compileJava'
+    filesMatching(["plugin.yml", "bungee.yml"]) {
+        expand(version: project.version, displayName: project.property("name"))
     }
 }
 
 
-
-
-
-
-task shadowJarAll(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
-    dependsOn subprojects.shadowJar
-
-    mergeServiceFiles()
-    from project(':spigot').shadowJar.archiveFile
-    from project(':bungeecord').shadowJar.archiveFile
-    from project(':common').shadowJar.archiveFile
-}
-
-
-task shadowJarSpigot(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
+shadowJar {
     dependsOn 'processResources'
     from project(':spigot').sourceSets.main.output
-    from project(':common').sourceSets.main.output
-
-    mergeServiceFiles()
-
-    configurations = [project(':spigot').configurations.runtimeClasspath, project(':common').configurations.runtimeClasspath]
-}
-
-task shadowJarBungee(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
-    dependsOn 'processResources'
     from project(':bungeecord').sourceSets.main.output
     from project(':common').sourceSets.main.output
 
     mergeServiceFiles()
 
-    configurations = [project(':bungeecord').configurations.runtimeClasspath, project(':common').configurations.runtimeClasspath]
-}
-
-
-
-
-task obfuscateAll(type: proguard.gradle.ProGuardTask, dependsOn: ['shadowJarAll']) {
-    configuration 'proguard.conf'
-    injars tasks.shadowJarAll.archiveFile
-    outjars "${buildDir}/libs/${project.name}-all-${project.version}.jar"
-    libraryjars configurations.shadow
+    configurations = [
+            project(':spigot').configurations.runtimeClasspath,
+            project(':bungeecord').configurations.runtimeClasspath,
+            project(':common').configurations.runtimeClasspath
+    ]
 
 }
 
-task obfuscateSpigot(type: proguard.gradle.ProGuardTask, dependsOn: ['shadowJarSpigot']) {
-    configuration 'proguard.conf'
-    injars tasks.shadowJarAll.archiveFile
-    outjars "${buildDir}/libs/${project.name}-${project.version}-s.jar"
-    libraryjars configurations.shadow
-
+task copyJar(type: Copy) {
+    doLast {
+        copy {
+            from shadowJar.archiveFile
+            into 'C:\\panel\\servers\\XCord\\plugins'
+        }
+        copy {
+            from shadowJar.archiveFile
+            into 'C:\\panel\\servers\\Lobby\\plugins'
+        }
+    }
 }
-
-task obfuscateBungee(type: proguard.gradle.ProGuardTask, dependsOn: ['shadowJarBungee']) {
-    configuration 'proguard.conf'
-    injars tasks.shadowJarAll.archiveFile
-    outjars "${buildDir}/libs/${project.name}-${project.version}-b.jar"
-    libraryjars configurations.shadow
-
-}
-
 
 shadowJar.dependsOn subprojects*.tasks*.withType(JavaCompile)
 processResources.dependsOn subprojects*.tasks*.withType(JavaCompile)
+copyJar.dependsOn shadowJar

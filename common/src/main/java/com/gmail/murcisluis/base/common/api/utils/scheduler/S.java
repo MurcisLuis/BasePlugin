@@ -25,7 +25,7 @@ public class S {
         return (T) instance.sync(runnable,delay);
     }
 
-    public static <T> T syncTask(Runnable runnable,long interval){
+    public static <T> T syncTask(Runnable runnable, long interval){
         return (T) instance.syncTask(runnable, interval);
     }
 

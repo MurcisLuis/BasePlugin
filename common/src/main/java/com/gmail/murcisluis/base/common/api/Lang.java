@@ -1,12 +1,11 @@
-package com.gmail.murcisluis.base.bungee.api;
+package com.gmail.murcisluis.base.common.api;
 
-import com.gmail.murcisluis.base.common.api.Base;
-import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
 import com.gmail.murcisluis.base.common.api.utils.Common;
 import com.gmail.murcisluis.base.common.api.utils.config.ConfigValue;
 import com.gmail.murcisluis.base.common.api.utils.config.FileConfig;
 import com.gmail.murcisluis.base.common.api.utils.config.Phrase;
 import com.google.common.collect.Maps;
+
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;

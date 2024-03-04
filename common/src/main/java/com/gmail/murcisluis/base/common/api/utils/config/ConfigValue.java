@@ -1,11 +1,5 @@
 package com.gmail.murcisluis.base.common.api.utils.config;
 
-import org.bukkit.Bukkit;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-
 public class ConfigValue<T> {
 
 	protected final FileConfig<?> config;
@@ -29,20 +23,10 @@ public class ConfigValue<T> {
 
 	@SuppressWarnings("unchecked")
 	public void updateValue() {
-		updateValue(false);
-	}
-
-	public void forceUpdateValue() {
-		updateValue(true);
-	}
-
-	@SuppressWarnings("unchecked")
-	public void updateValue(boolean forceUpdate) {
-		if (!config.contains(path) || forceUpdate) {
-			if (value == null)
-				value = defaultValue;
+		if (!config.contains(path)) {
+			value = defaultValue;
 			if (setDefault) {
-				config.set(path, value);
+				config.set(path, defaultValue);
 				config.saveData();
 				config.reload();
 			}
