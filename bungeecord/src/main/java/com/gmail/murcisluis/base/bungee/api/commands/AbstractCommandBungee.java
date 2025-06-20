@@ -4,7 +4,7 @@ package com.gmail.murcisluis.base.bungee.api.commands;
 
 
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
-import com.gmail.murcisluis.base.common.api.Lang;
+import com.gmail.murcisluis.base.common.localization.LocalizationManager;
 import com.gmail.murcisluis.base.common.api.commands.CommandBase;
 import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
 import com.gmail.murcisluis.base.common.api.exception.AbstractCommandException;
@@ -142,7 +142,8 @@ public abstract class AbstractCommandBungee extends Command implements CommandBa
                 if (CommandValidator.isIdentifier(args[0], subCommand)) {
                     final String[] subCommandArgs = Arrays.copyOfRange(args, 1, args.length);
                     if (subCommandArgs.length < subCommand.getMinArgs()) {
-                        Lang.COMMAND_USAGE.send(sender, Placeholder.parsed("usage", subCommand.getUsage()), Placeholder.parsed("description", subCommand.getDescription()));
+                        String message = LocalizationManager.getFrameworkMessage("invalid-args", "<red>Invalid arguments. Usage: {usage}</red>");
+                        Common.tell(sender, message, Placeholder.parsed("usage", subCommand.getUsage()), Placeholder.parsed("description", subCommand.getDescription()));
                         return true;
                     }
                     return ((AbstractCommandBungee) subCommand).handle(sender, subCommandArgs);
@@ -151,7 +152,8 @@ public abstract class AbstractCommandBungee extends Command implements CommandBa
         } else if (getMinArgs() > 0) {
             CommandBase command= PLUGIN.getCommandManager().getMainCommand();
 
-            Lang.COMMAND_USAGE.send(sender, Placeholder.parsed("name", command.getName()),
+            String message = LocalizationManager.getFrameworkMessage("invalid-args", "<red>Invalid arguments. Usage: {usage}</red>");
+            Common.tell(sender, message, Placeholder.parsed("name", command.getName()),
                     Placeholder.parsed("aliases", command.getAliasesL().size() > 1
                             ? ", " + String.join(", ", command.getAliasesL())
                             : ""),

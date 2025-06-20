@@ -7,7 +7,7 @@ import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
 import com.gmail.murcisluis.base.spigot.api.BaseSpigot;
 import com.gmail.murcisluis.base.common.api.exception.AbstractCommandException;
 import com.gmail.murcisluis.base.common.api.utils.Common;
-import com.gmail.murcisluis.base.spigot.api.Lang;
+import com.gmail.murcisluis.base.common.localization.LocalizationManager;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -125,7 +125,8 @@ public abstract class AbstractCommandSpigot extends Command implements CommandBa
                 if (CommandValidator.isIdentifier(args[0], subCommand)) {
                     final String[] subCommandArgs = Arrays.copyOfRange(args, 1, args.length);
                     if (subCommandArgs.length < subCommand.getMinArgs()) {
-                        Lang.COMMAND_USAGE.send(sender, Placeholder.parsed("usage", subCommand.getUsage()), Placeholder.parsed("description", subCommand.getDescription()));
+                        String message = LocalizationManager.getFrameworkMessage("invalid-args", "<red>Invalid arguments. Usage: {usage}</red>");
+                        Common.tell(sender, message, Placeholder.parsed("usage", subCommand.getUsage()), Placeholder.parsed("description", subCommand.getDescription()));
                         return true;
                     }
                     return ((AbstractCommandSpigot) subCommand).handle(sender, subCommandArgs);
@@ -134,7 +135,8 @@ public abstract class AbstractCommandSpigot extends Command implements CommandBa
         } else if (getMinArgs() > 0) {
             CommandBase command= PLUGIN.getCommandManager().getMainCommand();
 
-            Lang.COMMAND_USAGE.send(sender, Placeholder.parsed("name", command.getName()),
+            String message = LocalizationManager.getFrameworkMessage("invalid-args", "<red>Invalid arguments. Usage: {usage}</red>");
+            Common.tell(sender, message, Placeholder.parsed("name", command.getName()),
                     Placeholder.parsed("aliases", command.getAliasesL().size() > 1
                             ? ", " + String.join(", ", command.getAliasesL())
                             : ""));

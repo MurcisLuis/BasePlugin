@@ -5,18 +5,21 @@ import com.gmail.murcisluis.base.bungee.api.utils.config.FileConfigBungee;
 import com.gmail.murcisluis.base.bungee.plugin.BaseBungeePlugin;
 import com.gmail.murcisluis.base.common.api.Base;
 import com.gmail.murcisluis.base.common.api.BasePlugin;
-import com.gmail.murcisluis.base.common.api.Lang;
+import com.gmail.murcisluis.base.common.api.localization.InternalMessages;
 import com.gmail.murcisluis.base.common.api.Settings;
+import com.gmail.murcisluis.base.common.api.utils.Common;
 import com.gmail.murcisluis.base.common.api.utils.DExecutor;
 import com.gmail.murcisluis.base.common.api.utils.config.FileConfig;
 
 import lombok.Getter;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.platform.bungeecord.BungeeAudiences;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 public class BaseBungee extends Base {
@@ -38,7 +41,7 @@ public class BaseBungee extends Base {
     }
     public void enable() {
         Settings.reload();
-        Lang.reload();
+        LocalizationManager.getInstance().reloadAllLanguages();
         DExecutor.init(3);
         this.audience= BungeeAudiences.create((Plugin) plugin);
         this.commandManager = new CommandManagerBungee();
@@ -55,13 +58,13 @@ public class BaseBungee extends Base {
 
     public void reload() {
         Settings.reload();
-        Lang.reload();
+        LocalizationManager.getInstance().reloadAllLanguages();
     }
     public Audience audienciePlayer(Object player){
         if (player instanceof ProxiedPlayer) {
             return audience.player((ProxiedPlayer)player);
         }
-        throw new IllegalArgumentException("player is not a BungeeCord ProxiedPlayer");
+        throw new IllegalArgumentException(InternalMessages.getErrorMessage(InternalMessages.ErrorMessage.NOT_BUNGEE_PLAYER));
 
     }
 
@@ -70,7 +73,7 @@ public class BaseBungee extends Base {
         if (sender instanceof CommandSender) {
             return audience.sender((CommandSender) sender);
         }
-        throw new IllegalArgumentException("sender is not a BungeeCord CommandSender");
+        throw new IllegalArgumentException(InternalMessages.getErrorMessage(InternalMessages.ErrorMessage.NOT_BUNGEE_SENDER));
     }
 
     @Override

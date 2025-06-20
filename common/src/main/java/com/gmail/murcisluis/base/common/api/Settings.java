@@ -1,34 +1,47 @@
 package com.gmail.murcisluis.base.common.api;
 
-import com.gmail.murcisluis.base.common.api.utils.config.CFG;
+import com.gmail.murcisluis.base.common.api.config.ConfigurationManager;
 import com.gmail.murcisluis.base.common.api.utils.config.FileConfig;
-import com.gmail.murcisluis.base.common.api.utils.config.Key;
-
 import lombok.experimental.UtilityClass;
 
+/**
+ * @deprecated Use {@link ConfigurationManager} instead.
+ * This class is kept for backward compatibility and will be removed in a future version.
+ * 
+ * Migration guide:
+ * - Replace Settings.getConfig() with ConfigurationManager.getInstance().getConfig("config.yml")
+ * - Replace Settings.reload() with ConfigurationManager.getInstance().reloadConfig("config.yml")
+ * - Use ConfigurationManager.FrameworkSettings for framework-specific settings
+ */
+@Deprecated
 @UtilityClass
 public class Settings {
 
-    private static final Base BASE = BaseAPIFactory.get();
-    private static final FileConfig<?> CONFIG = BASE.getFileConfig("config.yml");
+    private static final ConfigurationManager configManager = ConfigurationManager.getInstance();
 
-    @Key("update-checker")
+    /**
+     * @deprecated Use {@link ConfigurationManager.FrameworkSettings#isUpdateCheckerEnabled()} instead.
+     */
+    @Deprecated
     public static boolean CHECK_FOR_UPDATES = true;
-
 
     // ========================================= //
 
     /**
      * Reload all Settings
+     * @deprecated Use {@link ConfigurationManager#reloadConfig(String)} instead.
      */
+    @Deprecated
     public static void reload() {
-        CONFIG.reload();
-
-        CFG.load(BASE.getPlugin(), Settings.class, CONFIG.getFile());
-
+        configManager.reloadConfig("config.yml");
     }
 
+    /**
+     * @deprecated Use {@link ConfigurationManager#getConfig(String)} instead.
+     */
+    @Deprecated
     public static FileConfig getConfig() {
-        return CONFIG;
+        return configManager.getConfig("config.yml");
     }
+
 }

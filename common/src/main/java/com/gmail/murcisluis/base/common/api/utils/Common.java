@@ -2,6 +2,7 @@ package com.gmail.murcisluis.base.common.api.utils;
 
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
 import com.gmail.murcisluis.base.common.api.Base;
+import com.gmail.murcisluis.base.common.localization.LocalizationManager;
 import lombok.experimental.UtilityClass;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -12,10 +13,31 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
+/**
+ * Common utilities for the BasePlugin framework.
+ * This class provides shared functionality across all platform implementations.
+ * 
+ * @deprecated This class will be refactored in future versions to reduce static dependencies.
+ * Consider using {@link LocalizationManager} directly for messages.
+ */
 @UtilityClass
 public class Common {
 
 	private static final Pattern SPACING_CHARS_REGEX = Pattern.compile("[_ \\-]+");
+	
+	/**
+	 * Gets the framework prefix from the localization manager.
+	 * @return The framework prefix
+	 */
+	public static String getPrefix() {
+		return LocalizationManager.getFrameworkMessage("prefix", "<gray>[<aqua>BasePlugin</aqua>]</gray> ");
+	}
+	
+	/**
+	 * Legacy prefix - kept for backward compatibility.
+	 * @deprecated Use {@link #getPrefix()} instead
+	 */
+	@Deprecated
 	public static String PREFIX = "&8[&3BasePlugin&8] &7";
 
 	private static final Map<Character, String> legacyColorsToMiniMessage = new HashMap<>();
@@ -73,7 +95,7 @@ public class Common {
 	 * @param message The message.
 	 */
 	public static void log(Level level, String message) {
-		BaseAPIFactory.getPlugin().getLogger().log(level, PREFIX + message);
+		BaseAPIFactory.getPlugin().getLogger().log(level, getPrefix() + message);
 	}
 
 	/**

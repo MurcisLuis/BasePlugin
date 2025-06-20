@@ -1,1 +1,55 @@
+# BasePlugin Framework Configuration
+# This file contains framework-specific settings only
+# For your plugin-specific configurations, create your own config files
+
+# Framework Settings
+framework:
+  # Whether to check for framework updates on startup
+  update-checker: true
+  
+  # Timeout for async operations in milliseconds
+  async-timeout: 5000
+  
+  # Enable debug mode for framework operations
+  debug: false
+  
+  # Maximum number of cached configurations
+  max-cached-configs: 50
+  
+  # Framework logging level (INFO, WARNING, SEVERE)
+  log-level: "INFO"
+  
+  # Enable performance monitoring
+  performance-monitoring: false
+
+# Plugin Development Settings (for plugins using this framework)
+plugin:
+  # Default prefix for plugin messages (can be overridden)
+  default-prefix: "&8[&3Plugin&8] &7"
+  
+  # Enable automatic command registration
+  auto-register-commands: true
+  
+  # Enable automatic listener registration
+  auto-register-listeners: true
+  
+  # Default language for new plugins
+  default-language: "en"
+
+# Advanced Framework Settings
+advanced:
+  # Thread pool size for async operations
+  thread-pool-size: 4
+  
+  # Enable reflection caching for better performance
+  reflection-cache: true
+  
+  # Maximum reflection cache size
+  reflection-cache-size: 1000
+  
+  # Enable configuration validation
+  config-validation: true
+
+# Legacy Settings (deprecated - use framework.* instead)
+# These are kept for backward compatibility
 update-checker: true

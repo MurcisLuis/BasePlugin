@@ -1,6 +1,7 @@
 package com.gmail.murcisluis.base.spigot.api.commands;
 
-import com.gmail.murcisluis.base.common.api.Lang;
+import com.gmail.murcisluis.base.common.localization.LocalizationManager;
+import com.gmail.murcisluis.base.common.api.utils.Common;
 import com.gmail.murcisluis.base.common.api.commands.CommandBase;
 import lombok.experimental.UtilityClass;
 import org.bukkit.command.CommandSender;
@@ -20,7 +21,8 @@ public class CommandValidator {
      */
     public static Player getPlayer(CommandSender sender) {
         if (!(sender instanceof Player)) {
-            Lang.ONLY_PLAYER.send(sender);
+            String message = LocalizationManager.getFrameworkMessage("player-only", "<red>This command can only be used by players.</red>");
+            Common.tell(sender, message);
             return null;
         }
         return (Player) sender;
@@ -59,13 +61,15 @@ public class CommandValidator {
      */
     public static boolean canExecute(CommandSender sender, CommandBase commandBase) {
         if (commandBase.isPlayerOnly() && !(sender instanceof Player)) {
-            Lang.ONLY_PLAYER.send(sender);
+            String message = LocalizationManager.getFrameworkMessage("player-only", "<red>This command can only be used by players.</red>");
+            Common.tell(sender, message);
             return false;
         }
 
         String perm = commandBase.getPermission();
         if (perm != null && !perm.trim().isEmpty() && !sender.hasPermission(perm)) {
-            Lang.NO_PERM.send(sender);
+            String message = LocalizationManager.getFrameworkMessage("permissions.no-permission", "<red>You don't have permission to use this command.</red>");
+            Common.tell(sender, message);
             return false;
         }
         return true;

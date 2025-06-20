@@ -1,0 +1,120 @@
+# BasePlugin Framework Language File
+# ============================================================================
+# BasePlugin Framework - Language Configuration
+# ============================================================================
+# This file contains framework-specific messages only
+# For your plugin-specific messages, create your own language files
+# ============================================================================
+
+framework:
+  # ========================================
+  # GENERAL FRAMEWORK SETTINGS
+  # ========================================
+  prefix: "<gray>[<aqua>BasePlugin</aqua>]</gray> "
+  command-usage: "<yellow>Usage:</yellow> <white>{usage}</white>\n<yellow>Description:</yellow> <white>{description}</white>\n<yellow>Command:</yellow> <white>/{name}</white>\n<yellow>Aliases:</yellow> <white>{aliases}</white>"
+  only-player: "<red>This command can only be executed by players.</red>"
+  
+  # ========================================
+  # PERMISSION & ERROR MESSAGES
+  # ========================================
+  permissions:
+    no-permission: "<red>You don't have permission to execute this command.</red>"
+    unknown-command: "<red>Unknown command '{command}'. Use /{prefix} help for available commands.</red>"
+  
+  # ========================================
+  # RELOAD COMMAND MESSAGES
+  # ========================================
+  reload:
+    success: "<green>Configuration reloaded successfully!</green>"
+    failed: "<red>Error reloading configuration: {error}</red>"
+    description: "Reload plugin configuration"
+  
+  # ========================================
+  # HELP COMMAND MESSAGES
+  # ========================================
+  help:
+    header: "<gray>========== <aqua>Available Commands</aqua> ==========</gray>"
+    footer: "<gray>==========================================</gray>"
+    command-format: "<yellow>/{prefix} {command}</yellow> - <white>{description}</white>{permission}"
+    description: "Show this help message"
+  
+  # ========================================
+  # INFO COMMAND MESSAGES
+  # ========================================
+  info:
+    header: "<gray>========== <aqua>Plugin Information</aqua> ==========</gray>"
+    footer: "<gray>==========================================</gray>"
+    framework-status: "<gray>Framework Status:</gray> {status}"
+    plugin-name: "<gray>Plugin:</gray> <yellow>{name}</yellow>"
+    plugin-version: "<gray>Version:</gray> <yellow>{version}</yellow>"
+    plugin-author: "<gray>Author:</gray> <yellow>{author}</yellow>"
+    server-version: "<gray>Server Version:</gray> <yellow>{version}</yellow>"
+    description: "Show plugin information"
+  
+  # ========================================
+  # VERSION COMMAND MESSAGES
+  # ========================================
+  version:
+    framework-info: "<gray>Framework:</gray> <aqua>BasePlugin Framework</aqua> <yellow>v{version}</yellow>"
+    plugin-info: "<gray>Plugin:</gray> <aqua>{name}</aqua> <yellow>v{version}</yellow>"
+    server-info: "<gray>Server:</gray> <yellow>{version}</yellow>"
+    update-check: "<gray>Checking for updates...</gray>"
+    no-update-check: "<yellow>Update checking not implemented.</yellow>"
+    description: "Show plugin version"
+  
+  # ========================================
+  # UPDATE SYSTEM MESSAGES
+  # ========================================
+  updates:
+    available: "<yellow>A new version ({version}) is available!</yellow>"
+    download: "<green>Download: {url}</green>"
+    current: "<green>You are using the latest version!</green>"
+  
+  # Version messages
+  version-info: "<aqua>BasePlugin Framework v{version}</aqua>"
+  version-author: "<gray>Author: {author}</gray>"
+  version-description: "<gray>{description}</gray>"
+  
+  # Error messages
+  command-error: "<red>An error occurred while executing the command.</red>"
+  config-error: "<red>Configuration error: {error}</red>"
+  language-not-found: "<red>Language file '{language}' not found.</red>"
+  
+  # Loading messages
+  loading: "<yellow>Loading {component}...</yellow>"
+  loaded: "<green>{component} loaded successfully!</green>"
+  unloading: "<yellow>Unloading {component}...</yellow>"
+  unloaded: "<green>{component} unloaded successfully!</green>"
+  
+  # Debug messages
+  debug-enabled: "<yellow>Debug mode enabled.</yellow>"
+  debug-disabled: "<yellow>Debug mode disabled.</yellow>"
+  
+  # Performance messages
+  performance-report: "<aqua>Performance Report:</aqua>"
+  execution-time: "<gray>Execution time: {time}ms</gray>"
+  memory-usage: "<gray>Memory usage: {memory}MB</gray>"
+
+# Plugin Development Messages (for plugins using this framework)
+plugin:
+  # Default messages that plugins can override
+  unknown-command: "<red>Unknown command. Use /help for available commands.</red>"
+  invalid-args: "<red>Invalid arguments. Usage: {usage}</red>"
+  player-only: "<red>This command can only be used by players.</red>"
+  console-only: "<red>This command can only be used from console.</red>"
+  
+  # Generic success/error messages
+  success: "<green>Operation completed successfully!</green>"
+  error: "<red>An error occurred: {error}</red>"
+  
+  # Common placeholders
+  enabled: "<green>Enabled</green>"
+  disabled: "<red>Disabled</red>"
+  yes: "<green>Yes</green>"
+  no: "<red>No</red>"
+
+# Legacy Messages (deprecated - use framework.* instead)
+# These are kept for backward compatibility
+prefix: "<gray>[<aqua>Plugin</aqua>]</gray> "
+no-perm: "<red>You don't have permission to use this command.</red>"
+reloaded: "<green>Configuration reloaded successfully!</green>"

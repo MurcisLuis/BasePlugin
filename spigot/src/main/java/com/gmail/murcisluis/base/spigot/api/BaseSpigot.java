@@ -7,7 +7,8 @@ import com.gmail.murcisluis.base.spigot.api.utils.config.FileConfigSpigot;
 import com.gmail.murcisluis.base.spigot.plugin.BaseSpigotPlugin;
 import com.gmail.murcisluis.base.common.api.Base;
 import com.gmail.murcisluis.base.common.api.BasePlugin;
-import com.gmail.murcisluis.base.common.api.Lang;
+import com.gmail.murcisluis.base.common.localization.LocalizationManager;
+import com.gmail.murcisluis.base.common.api.localization.InternalMessages;
 import com.gmail.murcisluis.base.common.api.Settings;
 import com.gmail.murcisluis.base.common.api.utils.Common;
 import com.gmail.murcisluis.base.common.api.utils.DExecutor;
@@ -18,11 +19,13 @@ import com.gmail.murcisluis.base.common.api.utils.reflect.Version;
 import lombok.Getter;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -47,7 +50,7 @@ public class BaseSpigot extends Base {
     }
     public void enable() {
         Settings.reload();
-        Lang.reload();
+        LocalizationManager.getInstance().reloadAllLanguages();
         DExecutor.init(3);
 
         this.audience=BukkitAudiences.create(getPlugin());
@@ -63,7 +66,7 @@ public class BaseSpigot extends Base {
 
     public void reload() {
         Settings.reload();
-        Lang.reload();
+        LocalizationManager.getInstance().reloadAllLanguages();
     }
 
     @Override
@@ -71,7 +74,7 @@ public class BaseSpigot extends Base {
         if (sender instanceof CommandSender) {
             return audience.sender((CommandSender) sender);
         }
-        throw new IllegalArgumentException("sender is not a Spigot CommandSender");    }
+        throw new IllegalArgumentException(InternalMessages.getErrorMessage(InternalMessages.ErrorMessage.NOT_SPIGOT_SENDER));    }
 
     @Override
     public String placeholderAPI(Object player, String message) {

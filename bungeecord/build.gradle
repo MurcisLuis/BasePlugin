@@ -1,6 +1,6 @@
 plugins {
-    id 'java'
-    id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id 'java-library'
+    id 'com.gradleup.shadow' version '8.3.6'
 }
 
 configurations {
@@ -8,9 +8,9 @@ configurations {
 }
 
 dependencies {
-    implementation project(':common')
-    compileOnly 'net.md-5:bungeecord-api:1.16-R0.4'
-    implementation 'net.kyori:adventure-platform-bungeecord:4.3.1'
+    api project(':common')
+    compileOnly 'net.md-5:bungeecord-api:1.21-R0.1-SNAPSHOT'
+    api 'net.kyori:adventure-platform-bungeecord:4.17.0'
 }
 
 tasks {
