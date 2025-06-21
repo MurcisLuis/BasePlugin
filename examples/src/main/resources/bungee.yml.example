@@ -1,0 +1,13 @@
+name: YourPluginName
+version: '${version}'
+main: com.yourpackage.yourplugin.YourMainClass
+api-version: 1.13
+author: 'YourName'
+description: Your plugin description
+
+permissions:
+  yourplugin.admin:
+    description: Allow player to use admin commands
+  yourplugin.use:
+    default: true
+    description: Allow player to use default permissions

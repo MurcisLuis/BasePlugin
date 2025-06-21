@@ -182,28 +182,32 @@ public class ConfigurationManager {
          * Whether to check for updates on startup.
          */
         public static boolean isUpdateCheckerEnabled() {
-            return config.getBoolean("framework.update-checker", true);
+            Object value = config.get("framework.update-checker", true);
+            return value instanceof Boolean ? (Boolean) value : Boolean.parseBoolean(value.toString());
         }
         
         /**
          * Timeout for async operations in milliseconds.
          */
         public static long getAsyncTimeout() {
-            return config.getLong("framework.async-timeout", 5000L);
+            Object value = config.get("framework.async-timeout", 5000L);
+            return value instanceof Number ? ((Number) value).longValue() : Long.parseLong(value.toString());
         }
         
         /**
          * Whether debug mode is enabled.
          */
         public static boolean isDebugMode() {
-            return config.getBoolean("framework.debug", false);
+            Object value = config.get("framework.debug", false);
+            return value instanceof Boolean ? (Boolean) value : Boolean.parseBoolean(value.toString());
         }
         
         /**
          * Maximum number of cached configurations.
          */
         public static int getMaxCachedConfigs() {
-            return config.getInt("framework.max-cached-configs", 50);
+            Object value = config.get("framework.max-cached-configs", 50);
+            return value instanceof Number ? ((Number) value).intValue() : Integer.parseInt(value.toString());
         }
         
         /**

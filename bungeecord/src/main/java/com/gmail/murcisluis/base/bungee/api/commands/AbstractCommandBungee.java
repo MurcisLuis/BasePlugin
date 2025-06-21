@@ -4,7 +4,7 @@ package com.gmail.murcisluis.base.bungee.api.commands;
 
 
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
-import com.gmail.murcisluis.base.common.localization.LocalizationManager;
+import com.gmail.murcisluis.base.common.api.localization.LocalizationManager;
 import com.gmail.murcisluis.base.common.api.commands.CommandBase;
 import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
 import com.gmail.murcisluis.base.common.api.exception.AbstractCommandException;

@@ -6,15 +6,20 @@
 
 Un framework base moderno y robusto para el desarrollo de plugins de Minecraft (Spigot/BungeeCord) que implementa principios SOLID y patrones de diseño como Singleton. Diseñado para ser usado como dependencia en otros proyectos.
 
+> 📁 **¿Buscas ejemplos?** Revisa el módulo [`examples/`](examples/) para ver implementaciones de referencia.
+
 ## 🚀 Características
 
-- **Arquitectura Modular**: Separación clara entre common, spigot y bungeecord
+- **Framework Puro**: Solo APIs y utilidades, sin implementaciones forzadas
+- **Control Total**: El desarrollador decide qué inicializar y registrar
+- **Arquitectura Modular**: Separación clara entre common, spigot, bungeecord y examples
 - **Principios SOLID**: Implementación de principios de diseño sólidos
 - **Patrón Singleton Thread-Safe**: Factory pattern con sincronización adecuada
 - **API Moderna**: Uso de Adventure API para mensajes modernos
 - **Configuración Avanzada**: Sistema de configuración flexible y extensible
 - **Comandos Inteligentes**: Sistema de comandos con autocompletado
 - **Soporte Multi-Plataforma**: Compatible con Spigot y BungeeCord
+- **Ejemplos Incluidos**: Módulo `examples/` con implementaciones de referencia
 - **Versiones Actualizadas**: Todas las dependencias actualizadas a las últimas versiones
 
 ## 📋 Requisitos
@@ -84,6 +89,8 @@ dependencies {
 
 ## 🛠️ Uso Básico
 
+> 💡 **Tip**: Para ejemplos completos y detallados, consulta el módulo [`examples/`](examples/)
+
 ### Plugin de Spigot
 
 ```java
@@ -91,14 +98,15 @@ package com.tudominio.tuplugin;
 
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
 import com.gmail.murcisluis.base.spigot.api.BaseSpigotAPI;
-import com.gmail.murcisluis.base.spigot.api.BaseSpigot;
+import com.gmail.murcisluis.base.common.api.BasePlugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class TuPlugin extends JavaPlugin {
+public class TuPlugin extends JavaPlugin implements BasePlugin {
     
     @Override
     public void onLoad() {
         // Inicializar la API de BasePlugin
+        // Inicializar el framework
         BaseAPIFactory.initialize(new BaseSpigotAPI());
         BaseAPIFactory.getAPI().onLoad(this);
     }
@@ -108,18 +116,21 @@ public class TuPlugin extends JavaPlugin {
         // Habilitar la API
         BaseAPIFactory.getAPI().onEnable();
         
-        // Obtener la instancia de BaseSpigot
-        BaseSpigot base = (BaseSpigot) BaseAPIFactory.get();
-        
         // Tu lógica de plugin aquí
         getLogger().info("Plugin habilitado usando BasePlugin Framework!");
+        
+        // Registrar comandos personalizados (opcional)
+        // registerCommand(new MiComandoPersonalizado());
     }
     
     @Override
     public void onDisable() {
         // Deshabilitar la API de forma segura
-        BaseAPIFactory.shutdown();
+        BaseAPIFactory.getAPI().onDisable();
     }
+    
+    // Implementar métodos requeridos de BasePlugin
+    // Ver examples/ para implementaciones completas
 }
 ```
 
@@ -130,9 +141,10 @@ package com.tudominio.tuplugin;
 
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
 import com.gmail.murcisluis.base.bungeecord.api.BaseBungeeCordAPI;
+import com.gmail.murcisluis.base.common.api.BasePlugin;
 import net.md_5.bungee.api.plugin.Plugin;
 
-public class TuPlugin extends Plugin {
+public class TuPlugin extends Plugin implements BasePlugin {
     
     @Override
     public void onLoad() {
@@ -144,12 +156,18 @@ public class TuPlugin extends Plugin {
     public void onEnable() {
         BaseAPIFactory.getAPI().onEnable();
         getLogger().info("Plugin BungeeCord habilitado!");
+        
+        // Registrar comandos personalizados (opcional)
+        // registerCommand(new MiComandoBungee());
     }
     
     @Override
     public void onDisable() {
-        BaseAPIFactory.shutdown();
+        BaseAPIFactory.getAPI().onDisable();
     }
+    
+    // Implementar métodos requeridos de BasePlugin
+    // Ver examples/ para implementaciones completas
 }
 ```
 
@@ -183,23 +201,32 @@ audience.sendMessage(message);
 
 ### Comandos Personalizados
 
+> 📖 **Ejemplos completos**: Consulta [`examples/src/main/java/.../commands/`](examples/src/main/java/com/gmail/murcisluis/base/examples/) para ver implementaciones detalladas.
+
 ```java
-public class MiComando extends AbstractCommandSpigot {
+@CommandInfo(
+    permission = "miplugin.usar",
+    usage = "/micomando <args>",
+    description = "Mi comando personalizado",
+    aliases = {"mc", "cmd"}
+)
+public class MiComando extends AbstractCommandSpigot implements CommandBaseSpigot {
     
     public MiComando() {
         super("micomando");
     }
     
     @Override
-    public void execute(CommandSender sender, String[] args) {
-        // Lógica del comando
-        sender.sendMessage("¡Comando ejecutado!");
+    public CommandHandlerSpigot getCommandHandler() {
+        return (sender, args) -> {
+            sender.sendMessage("¡Comando ejecutado!");
+            return true;
+        };
     }
     
     @Override
-    public List<String> tabComplete(CommandSender sender, String[] args) {
-        // Autocompletado
-        return Arrays.asList("opcion1", "opcion2", "opcion3");
+    public TabCompleteHandlerSpigot getTabCompleteHandler() {
+        return (sender, args) -> Arrays.asList("opcion1", "opcion2", "opcion3");
     }
 }
 ```
@@ -266,6 +293,41 @@ tasks {
 3. **Liskov Substitution**: Las implementaciones son intercambiables
 4. **Interface Segregation**: Interfaces específicas y cohesivas
 5. **Dependency Inversion**: Dependencias de abstracciones, no concreciones
+
+## 📁 Módulo Examples
+
+El proyecto incluye un módulo `examples/` con implementaciones de referencia:
+
+### Estructura del módulo examples
+
+```
+examples/
+├── src/main/java/com/gmail/murcisluis/base/examples/
+│   ├── bungeecord/
+│   │   ├── ExampleBungeePlugin.java      # Plugin BungeeCord de ejemplo
+│   │   └── commands/
+│   │       └── ExampleCommandBungee.java # Comando BungeeCord de ejemplo
+│   └── spigot/
+│       ├── ExampleSpigotPlugin.java      # Plugin Spigot de ejemplo
+│       └── commands/
+│           └── ExampleCommandSpigot.java # Comando Spigot de ejemplo
+└── README.md                             # Documentación detallada
+```
+
+### ¿Cómo usar los ejemplos?
+
+1. **Consulta** el [README del módulo examples](examples/README.md)
+2. **Copia** las clases que necesites a tu proyecto
+3. **Modifica** según tus necesidades específicas
+4. **Personaliza** comandos, configuraciones y lógica
+
+> ⚠️ **Importante**: Los ejemplos son para **referencia educativa**. No los uses directamente en producción sin adaptarlos.
+
+### Diferencias clave
+
+- **Framework Core**: Solo APIs y utilidades
+- **Examples**: Implementaciones completas y funcionales
+- **Tu Plugin**: Adaptación personalizada de los ejemplos
 
 ## 🔄 Migración desde v1.0
 

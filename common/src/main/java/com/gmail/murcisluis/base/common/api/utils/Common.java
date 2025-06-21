@@ -2,7 +2,7 @@ package com.gmail.murcisluis.base.common.api.utils;
 
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
 import com.gmail.murcisluis.base.common.api.Base;
-import com.gmail.murcisluis.base.common.localization.LocalizationManager;
+import com.gmail.murcisluis.base.common.api.localization.LocalizationManager;
 import lombok.experimental.UtilityClass;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.minimessage.MiniMessage;

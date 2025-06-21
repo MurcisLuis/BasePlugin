@@ -7,7 +7,7 @@ import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
 import com.gmail.murcisluis.base.spigot.api.BaseSpigot;
 import com.gmail.murcisluis.base.common.api.exception.AbstractCommandException;
 import com.gmail.murcisluis.base.common.api.utils.Common;
-import com.gmail.murcisluis.base.common.localization.LocalizationManager;
+import com.gmail.murcisluis.base.common.api.localization.LocalizationManager;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;

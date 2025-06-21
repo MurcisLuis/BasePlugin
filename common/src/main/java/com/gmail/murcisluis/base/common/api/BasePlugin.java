@@ -16,7 +16,7 @@ public interface BasePlugin {
     Description getPluginDescription();
 
 
-    Object getServer();
+    Object getServerInstance();
 
     String getVersionServer();
 

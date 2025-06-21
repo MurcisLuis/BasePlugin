@@ -113,6 +113,11 @@ public class FileConfigBungee implements FileConfig<Configuration> {
     }
 
     @Override
+    public Object get(String path, Object defaultValue) {
+        return configuration.get(path, defaultValue);
+    }
+
+    @Override
     public void set(String path, Object value) {
         configuration.set(path, value);
     }

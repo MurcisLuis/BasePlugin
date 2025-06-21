@@ -236,6 +236,24 @@ public class LocalizationManager {
     }
     
     /**
+     * Gets a framework message with placeholders
+     */
+    public static String getFrameworkMessage(String key, String defaultValue) {
+        return getInstance().getMessage("framework." + key, defaultValue);
+    }
+    
+    /**
+     * Send version message to sender
+     */
+    public static void sendVersionMessage(Object sender) {
+        String versionMessage = getFrameworkMessage("version.message", 
+            "<gray>Plugin Version:</gray> <yellow>{version}</yellow>");
+        String pluginVersion = InternalMessages.getDefaultValue(InternalMessages.DefaultValue.PLUGIN_VERSION);
+        com.gmail.murcisluis.base.common.api.utils.Common.tell(sender, versionMessage, 
+            net.kyori.adventure.text.minimessage.tag.resolver.Placeholder.unparsed("version", pluginVersion));
+    }
+    
+    /**
      * Framework-specific messages that replace the old hardcoded Lang class.
      */
     public static class FrameworkMessages {
@@ -320,7 +338,8 @@ public class LocalizationManager {
         }
         
         public String getString(String key, String defaultValue) {
-            return config.getString(key, defaultValue);
+            Object value = config.get(key, defaultValue);
+            return value != null ? value.toString() : defaultValue;
         }
         
         public void reload() {

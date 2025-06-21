@@ -6,6 +6,7 @@ import com.gmail.murcisluis.base.bungee.plugin.BaseBungeePlugin;
 import com.gmail.murcisluis.base.common.api.Base;
 import com.gmail.murcisluis.base.common.api.BasePlugin;
 import com.gmail.murcisluis.base.common.api.localization.InternalMessages;
+import com.gmail.murcisluis.base.common.api.localization.LocalizationManager;
 import com.gmail.murcisluis.base.common.api.Settings;
 import com.gmail.murcisluis.base.common.api.utils.Common;
 import com.gmail.murcisluis.base.common.api.utils.DExecutor;

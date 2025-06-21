@@ -7,7 +7,7 @@ import com.gmail.murcisluis.base.spigot.api.utils.config.FileConfigSpigot;
 import com.gmail.murcisluis.base.spigot.plugin.BaseSpigotPlugin;
 import com.gmail.murcisluis.base.common.api.Base;
 import com.gmail.murcisluis.base.common.api.BasePlugin;
-import com.gmail.murcisluis.base.common.localization.LocalizationManager;
+import com.gmail.murcisluis.base.common.api.localization.LocalizationManager;
 import com.gmail.murcisluis.base.common.api.localization.InternalMessages;
 import com.gmail.murcisluis.base.common.api.Settings;
 import com.gmail.murcisluis.base.common.api.utils.Common;

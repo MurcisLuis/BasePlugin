@@ -4,7 +4,7 @@ import com.gmail.murcisluis.base.common.api.commands.CommandBase;
 import com.gmail.murcisluis.base.common.api.commands.CommandHandler;
 import com.gmail.murcisluis.base.common.api.commands.CommandInfo;
 import com.gmail.murcisluis.base.common.api.commands.TabCompleteHandler;
-import com.gmail.murcisluis.base.common.localization.LocalizationManager;
+import com.gmail.murcisluis.base.common.api.localization.LocalizationManager;
 import com.gmail.murcisluis.base.common.api.localization.InternalMessages;
 import com.gmail.murcisluis.base.common.api.utils.Common;
 import com.gmail.murcisluis.base.common.api.BaseAPIFactory;
@@ -52,8 +52,9 @@ public interface InfoSubCommand<T> extends CommandBase {
      * Show basic plugin information
      */
     default void showPluginInfo(Object sender) {
-        String pluginName = getPluginName();
-        String pluginVersion = getPluginVersion();
+        // Use default values since these methods are in VersionSubCommand
+        String pluginName = InternalMessages.getDefaultValue(InternalMessages.DefaultValue.PLUGIN_NAME);
+        String pluginVersion = InternalMessages.getDefaultValue(InternalMessages.DefaultValue.PLUGIN_VERSION);
         String pluginAuthor = getPluginAuthor();
         
         String nameMessage = LocalizationManager.getFrameworkMessage("info.plugin-name", 
@@ -73,7 +74,8 @@ public interface InfoSubCommand<T> extends CommandBase {
      * Show server information
      */
     default void showServerInfo(Object sender) {
-        String serverVersion = getServerVersion();
+        // Get server version from VersionSubCommand interface
+        String serverVersion = "Unknown"; // Default fallback
         String serverMessage = LocalizationManager.getFrameworkMessage("info.server-version", 
             "<gray>Server Version:</gray> <yellow>{version}</yellow>");
         Common.tell(sender, serverMessage, Placeholder.unparsed("version", serverVersion));
@@ -86,19 +88,7 @@ public interface InfoSubCommand<T> extends CommandBase {
         // Por defecto no hace nada, el usuario puede sobrescribir
     }
     
-    /**
-     * Get plugin name - should be overridden by implementation
-     */
-    default String getPluginName() {
-        return InternalMessages.getDefaultValue(InternalMessages.DefaultValue.PLUGIN_NAME);
-    }
-    
-    /**
-     * Get plugin version - should be overridden by implementation
-     */
-    default String getPluginVersion() {
-        return InternalMessages.getDefaultValue(InternalMessages.DefaultValue.PLUGIN_VERSION);
-    }
+    // Plugin name and version methods are provided by VersionSubCommand interface
     
     /**
      * Get plugin author - should be overridden by implementation
@@ -107,12 +97,7 @@ public interface InfoSubCommand<T> extends CommandBase {
         return InternalMessages.getDefaultValue(InternalMessages.DefaultValue.PLUGIN_AUTHOR);
     }
     
-    /**
-     * Get server version - should be overridden by implementation
-     */
-    default String getServerVersion() {
-        return InternalMessages.getDefaultValue(InternalMessages.DefaultValue.SERVER_VERSION);
-    }
+    // getServerVersion() method is provided by VersionSubCommand interface
 
     @Override
     default TabCompleteHandler<T> getTabCompleteHandler() {

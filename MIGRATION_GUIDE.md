@@ -228,7 +228,7 @@ The old `Settings` and `Lang` classes are marked as `@Deprecated` but still func
 ## Common Issues and Solutions
 
 ### Issue: "Cannot find LocalizationManager"
-**Solution:** Add the import: `import com.gmail.murcisluis.base.common.localization.LocalizationManager;`
+**Solution:** Add the import: `import com.gmail.murcisluis.base.common.api.localization.LocalizationManager;`
 
 ### Issue: "Cannot find ConfigurationManager"
 **Solution:** Add the import: `import com.gmail.murcisluis.base.common.config.ConfigurationManager;`
