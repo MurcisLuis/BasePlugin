@@ -1,6 +1,7 @@
 # BasePlugin Framework
 
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/murcisluis/BasePlugin)
+[![JitPack](https://jitpack.io/v/MurcisLuis/BasePlugin.svg)](https://jitpack.io/#MurcisLuis/BasePlugin)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.java.net/projects/jdk/21/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
@@ -30,59 +31,91 @@ Un framework base moderno y robusto para el desarrollo de plugins de Minecraft (
 
 ## 📦 Instalación como Dependencia
 
-### Gradle (Recomendado)
+### 🚀 Instalación Rápida (Sin autenticación)
 
-#### 1. Agregar el repositorio
+**Paso 1:** Agregar repositorios en tu `build.gradle`:
 
 ```gradle
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    maven { url 'https://maven.pkg.github.com/murcisluis/BasePlugin' }
 }
 ```
 
-#### 2. Agregar la dependencia
+**Paso 2:** Agregar dependencias según tu plataforma:
 
-**Para plugins de Spigot:**
+#### 🔧 Para Spigot/Paper
 ```gradle
 dependencies {
-    implementation 'com.gmail.murcisluis:BasePlugin-spigot:2.0.0'
+    implementation 'com.github.murcisluis.BasePlugin:spigot:v2.0.0'
+    implementation 'com.github.murcisluis.BasePlugin:common:v2.0.0'
 }
 ```
 
-**Para plugins de BungeeCord:**
+#### 🌐 Para BungeeCord/Waterfall
 ```gradle
 dependencies {
-    implementation 'com.gmail.murcisluis:BasePlugin-bungeecord:2.0.0'
+    implementation 'com.github.murcisluis.BasePlugin:bungeecord:v2.0.0'
+    implementation 'com.github.murcisluis.BasePlugin:common:v2.0.0'
 }
 ```
 
-**Para proyectos que usan ambos:**
+#### 📦 Todos los módulos
 ```gradle
 dependencies {
-    implementation 'com.gmail.murcisluis:BasePlugin-common:2.0.0'
-    implementation 'com.gmail.murcisluis:BasePlugin-spigot:2.0.0'
-    implementation 'com.gmail.murcisluis:BasePlugin-bungeecord:2.0.0'
+    implementation 'com.github.murcisluis:BasePlugin:v2.0.0'
 }
 ```
 
-### Maven
+> ✅ **Sin configuración adicional** - No necesitas tokens ni autenticación
+
+> 📖 **Instrucciones detalladas**: Ver [JITPACK.md](JITPACK.md) para guía completa de configuración con JitPack.
+
+### 📦 Maven
+
+**Paso 1:** Agregar repositorio JitPack:
 
 ```xml
 <repositories>
     <repository>
-        <id>github</id>
-        <url>https://maven.pkg.github.com/murcisluis/BasePlugin</url>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
     </repository>
 </repositories>
+```
 
+**Paso 2:** Agregar dependencias según tu plataforma:
+
+#### Para Spigot/Paper
+```xml
 <dependencies>
     <dependency>
-        <groupId>com.gmail.murcisluis</groupId>
-        <artifactId>BasePlugin-spigot</artifactId>
-        <version>2.0.0</version>
+        <groupId>com.github.murcisluis.BasePlugin</groupId>
+        <artifactId>spigot</artifactId>
+        <version>v2.0.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.murcisluis.BasePlugin</groupId>
+        <artifactId>common</artifactId>
+        <version>v2.0.0</version>
+    </dependency>
+</dependencies>
+```
+
+#### Para BungeeCord/Waterfall
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.github.murcisluis.BasePlugin</groupId>
+        <artifactId>bungeecord</artifactId>
+        <version>v2.0.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.github.murcisluis.BasePlugin</groupId>
+        <artifactId>common</artifactId>
+        <version>v2.0.0</version>
     </dependency>
 </dependencies>
 ```
