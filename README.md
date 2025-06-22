@@ -1,6 +1,6 @@
 # BasePlugin Framework
 
-[![Version](https://img.shields.io/badge/version-2.1.0-blue.svg)](https://github.com/murcisluis/BasePlugin)
+[![Version](https://img.shields.io/badge/version-2.2.0-blue.svg)](https://github.com/murcisluis/BasePlugin)
 [![JitPack](https://jitpack.io/v/MurcisLuis/BasePlugin.svg)](https://jitpack.io/#MurcisLuis/BasePlugin)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.java.net/projects/jdk/21/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
