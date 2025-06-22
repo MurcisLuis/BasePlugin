@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.gmail.murcisluis.base.bungee.api"},{"l":"com.gmail.murcisluis.base.bungee.api.commands"},{"l":"com.gmail.murcisluis.base.bungee.api.utils.config"},{"l":"com.gmail.murcisluis.base.bungee.api.utils.scheduler"},{"l":"com.gmail.murcisluis.base.bungee.plugin"}];updateSearchResults();

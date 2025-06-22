@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BasePlugin API Documentation</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 10px; font-size: 2.5em; font-weight: 300; }
+        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 40px; font-size: 1.2em; }
+        .modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin: 40px 0; }
+        .module { border-radius: 12px; padding: 25px; background: linear-gradient(145deg, #f8f9fa, #e9ecef); box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .module::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #3498db, #2980b9); }
+        .module:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .module h3 { color: #2c3e50; margin-top: 0; margin-bottom: 15px; font-size: 1.4em; display: flex; align-items: center; }
+        .module-icon { font-size: 1.5em; margin-right: 10px; }
+        .module p { color: #5a6c7d; margin-bottom: 20px; line-height: 1.6; }
+        .module a { display: inline-block; background: linear-gradient(45deg, #3498db, #2980b9); color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; transition: all 0.3s ease; font-weight: 500; }
+        .module a:hover { background: linear-gradient(45deg, #2980b9, #1f5f8b); transform: translateY(-2px); }
+        .module.unavailable { opacity: 0.7; }
+        .module.unavailable::before { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+        .module.unavailable a { background: #95a5a6; cursor: not-allowed; pointer-events: none; }
+        .status { margin-top: 40px; padding: 25px; border-radius: 10px; background: linear-gradient(145deg, #d5f4e6, #c8e6c9); border-left: 5px solid #27ae60; }
+        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BasePlugin API</h1>
+        <p class="subtitle">DocumentaciÃ³n generada con Gradle Javadoc</p>
+        
+        <div class="modules">            <div class="module">
+                <h3><span class="module-icon">ðŸ“¦</span>Common Module</h3>
+                <p>NÃºcleo del framework con funcionalidades compartidas entre plataformas.</p>
+                <a href="common/index.html">Ver DocumentaciÃ³n</a>
+            </div>            <div class="module">
+                <h3><span class="module-icon">ðŸ”§</span>Spigot Module</h3>
+                <p>ImplementaciÃ³n especÃ­fica para servidores Spigot/Paper.</p>
+                <a href="spigot/index.html">Ver DocumentaciÃ³n</a>
+            </div>            <div class="module">
+                <h3><span class="module-icon">ðŸŒ</span>BungeeCord Module</h3>
+                <p>ImplementaciÃ³n especÃ­fica para servidores BungeeCord/Waterfall.</p>
+                <a href="bungeecord/index.html">Ver DocumentaciÃ³n</a>
+            </div>        </div>
+        
+        <div class="status">
+            <h4>ðŸ“Š Estado de GeneraciÃ³n con Gradle</h4>
+            <ul>                <li><strong>COMMON:</strong> [OK] DocumentaciÃ³n disponible</li>
+                <li><strong>BUNGEECORD:</strong> [OK] DocumentaciÃ³n disponible</li>
+                <li><strong>SPIGOT:</strong> [OK] DocumentaciÃ³n disponible</li>
+            </ul>
+            <p><strong>MÃ©todo:</strong> Gradle Javadoc con fallback a documentaciÃ³n bÃ¡sica</p>
+        </div>
+        
+        <div class="footer">
+            <p>ðŸš€ BasePlugin Framework - DocumentaciÃ³n generada con Gradle</p>
+        </div>
+    </div>
+</body>
+</html>

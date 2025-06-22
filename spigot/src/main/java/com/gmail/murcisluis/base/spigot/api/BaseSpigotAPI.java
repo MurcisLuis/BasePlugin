@@ -13,7 +13,7 @@ public final class BaseSpigotAPI implements BaseAPI {
     public void onLoad(@NotNull BasePlugin plugin) {
         if (implementation != null) return;
 
-        implementation = new BaseSpigot(plugin);
+        implementation = new BaseSpigotImpl(plugin);
         implementation.load();
     }
     @Override

@@ -11,9 +11,14 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.Locale;
+import java.io.File;
+import java.io.IOException;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * Modern localization manager that replaces the old duplicated Lang classes.
@@ -33,11 +38,27 @@ public class LocalizationManager {
     private final MiniMessage miniMessage;
     private String currentLanguage;
     
+    // Player language preferences
+    private final Map<UUID, String> playerLanguages;
+    private final FileConfig playerDataConfig;
+    private final String PLAYER_DATA_FILE = "player_languages.yml";
+    
+    // Available languages cache
+    private final Set<String> availableLanguages;
+    
     private LocalizationManager() {
         this.base = BaseAPIFactory.get();
         this.languages = new ConcurrentHashMap<>();
         this.miniMessage = MiniMessage.miniMessage();
         this.currentLanguage = "en"; // Default language
+        
+        // Initialize player data structures
+        this.playerLanguages = new ConcurrentHashMap<>();
+        this.availableLanguages = new HashSet<>();
+        this.playerDataConfig = base.getFileConfig(PLAYER_DATA_FILE);
+        
+        // Load player language preferences from file
+        loadPlayerLanguageData();
     }
     
     /**
@@ -68,7 +89,9 @@ public class LocalizationManager {
         try {
             FileConfig config = base.getFileConfig(fileName);
             LanguageFile langFile = new LanguageFile(languageCode, config);
-            languages.put(languageCode.toLowerCase(), langFile);
+            String lowerCode = languageCode.toLowerCase();
+            languages.put(lowerCode, langFile);
+            availableLanguages.add(lowerCode);
             log.info("Language '" + languageCode + "' loaded from '" + fileName + "'");
             return true;
         } catch (Exception e) {
@@ -105,6 +128,52 @@ public class LocalizationManager {
     }
     
     /**
+     * Sets the language preference for a specific player.
+     * 
+     * @param playerUUID the player's UUID
+     * @param languageCode the language code to set
+     * @return true if the language was set successfully, false if language doesn't exist
+     */
+    public boolean setPlayerLanguage(@NonNull UUID playerUUID, @NonNull String languageCode) {
+        String lowerCode = languageCode.toLowerCase();
+        if (availableLanguages.contains(lowerCode)) {
+            playerLanguages.put(playerUUID, lowerCode);
+            savePlayerLanguageData();
+            log.info("Player " + playerUUID + " language set to: " + languageCode);
+            return true;
+        } else {
+            log.warning("Language '" + languageCode + "' not available for player " + playerUUID);
+            return false;
+        }
+    }
+    
+    /**
+     * Gets the language preference for a specific player.
+     * 
+     * @param playerUUID the player's UUID
+     * @return the player's language code, or the default language if not set
+     */
+    public String getPlayerLanguage(@NonNull UUID playerUUID) {
+        return playerLanguages.getOrDefault(playerUUID, currentLanguage);
+    }
+    
+    /**
+     * Removes a player's language preference.
+     * 
+     * @param playerUUID the player's UUID
+     * @return true if the preference was removed, false if it didn't exist
+     */
+    public boolean removePlayerLanguage(@NonNull UUID playerUUID) {
+        String removed = playerLanguages.remove(playerUUID);
+        if (removed != null) {
+            savePlayerLanguageData();
+            log.info("Removed language preference for player: " + playerUUID);
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * Gets a localized message as a string.
      * 
      * @param key the message key
@@ -113,6 +182,19 @@ public class LocalizationManager {
      */
     public String getMessage(@NonNull String key, Object... args) {
         return getMessage(currentLanguage, key, args);
+    }
+    
+    /**
+     * Gets a localized message for a specific player as a string.
+     * 
+     * @param playerUUID the player's UUID
+     * @param key the message key
+     * @param args optional arguments for placeholders
+     * @return the localized message in the player's preferred language
+     */
+    public String getPlayerMessage(@NonNull UUID playerUUID, @NonNull String key, Object... args) {
+        String playerLang = getPlayerLanguage(playerUUID);
+        return getMessage(playerLang, key, args);
     }
     
     /**
@@ -154,6 +236,19 @@ public class LocalizationManager {
      */
     public Component getComponent(@NonNull String key, TagResolver... resolvers) {
         return getComponent(currentLanguage, key, resolvers);
+    }
+    
+    /**
+     * Gets a localized message for a specific player as an Adventure Component.
+     * 
+     * @param playerUUID the player's UUID
+     * @param key the message key
+     * @param resolvers optional tag resolvers for MiniMessage
+     * @return the localized Component in the player's preferred language
+     */
+    public Component getPlayerComponent(@NonNull UUID playerUUID, @NonNull String key, TagResolver... resolvers) {
+        String playerLang = getPlayerLanguage(playerUUID);
+        return getComponent(playerLang, key, resolvers);
     }
     
     /**
@@ -323,6 +418,97 @@ public class LocalizationManager {
         public static void reload() {
             manager.reloadLanguage("en");
         }
+    }
+    
+    /**
+     * Loads player language preferences from the configuration file.
+     */
+    private void loadPlayerLanguageData() {
+        try {
+            if (playerDataConfig != null) {
+                Object playersData = playerDataConfig.get("players");
+                if (playersData instanceof Map) {
+                    @SuppressWarnings("unchecked")
+                    Map<String, Object> playersMap = (Map<String, Object>) playersData;
+                    
+                    for (Map.Entry<String, Object> entry : playersMap.entrySet()) {
+                        try {
+                            UUID playerUUID = UUID.fromString(entry.getKey());
+                            String language = entry.getValue().toString();
+                            if (availableLanguages.contains(language.toLowerCase())) {
+                                playerLanguages.put(playerUUID, language.toLowerCase());
+                            }
+                        } catch (IllegalArgumentException e) {
+                            log.warning("Invalid UUID in player language data: " + entry.getKey());
+                        }
+                    }
+                }
+                log.info("Loaded " + playerLanguages.size() + " player language preferences");
+            }
+        } catch (Exception e) {
+            log.log(Level.WARNING, "Failed to load player language data", e);
+        }
+    }
+    
+    /**
+     * Saves player language preferences to the configuration file.
+     */
+    private void savePlayerLanguageData() {
+        try {
+            if (playerDataConfig != null) {
+                Map<String, String> playersData = new ConcurrentHashMap<>();
+                
+                for (Map.Entry<UUID, String> entry : playerLanguages.entrySet()) {
+                    playersData.put(entry.getKey().toString(), entry.getValue());
+                }
+                
+                playerDataConfig.set("players", playersData);
+                playerDataConfig.set("last-updated", System.currentTimeMillis());
+                playerDataConfig.set("total-players", playersData.size());
+                
+                // Save the configuration
+                if (playerDataConfig instanceof com.gmail.murcisluis.base.common.api.utils.config.FileConfig) {
+                    // The FileConfig should handle saving automatically
+                    log.fine("Player language data saved for " + playersData.size() + " players");
+                }
+            }
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "Failed to save player language data", e);
+        }
+    }
+    
+    /**
+     * Gets statistics about player language usage.
+     * 
+     * @return a map with language codes and their usage count
+     */
+    public Map<String, Integer> getLanguageStatistics() {
+        Map<String, Integer> stats = new ConcurrentHashMap<>();
+        
+        for (String language : playerLanguages.values()) {
+            stats.put(language, stats.getOrDefault(language, 0) + 1);
+        }
+        
+        return stats;
+    }
+    
+    /**
+     * Gets the total number of players with language preferences set.
+     * 
+     * @return the number of players with language preferences
+     */
+    public int getPlayersWithLanguagePreferences() {
+        return playerLanguages.size();
+    }
+    
+    /**
+     * Clears all player language preferences.
+     * This method should be used with caution.
+     */
+    public void clearAllPlayerLanguages() {
+        playerLanguages.clear();
+        savePlayerLanguageData();
+        log.info("Cleared all player language preferences");
     }
     
     /**

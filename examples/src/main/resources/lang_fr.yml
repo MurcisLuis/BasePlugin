@@ -1,0 +1,112 @@
+# Fichier de Langue Française
+# Framework BasePlugin - Exemple de Localisation
+# Langue: Français (fr)
+# Version: 2.1.0
+
+# Messages de Bienvenue et d'Au revoir
+welcome:
+  message: "<green>Bienvenue sur le serveur, <yellow>{player}</yellow> !</green>"
+  first_time: "<green>Bienvenue sur le serveur pour la première fois, <yellow>{player}</yellow> ! Profitez bien de votre séjour !</green>"
+
+goodbye:
+  message: "<red>Au revoir, <yellow>{player}</yellow> ! À bientôt !</red>"
+  kick: "<red>{player} a été expulsé du serveur. Raison : {reason}</red>"
+
+# Messages d'Erreur
+error:
+  permission_denied: "<red>Vous n'avez pas la permission d'exécuter cette commande.</red>"
+  player_not_found: "<red>Joueur introuvable.</red>"
+  invalid_command: "<red>Commande invalide. Utilisez /help pour voir les commandes disponibles.</red>"
+  unknown_error: "<red>Une erreur inconnue s'est produite : {error_type}</red>"
+  language_not_available: "<red>La langue '{language}' n'est pas disponible. Langues disponibles : {available}</red>"
+  language_change_failed: "<red>Échec du changement de langue. Veuillez réessayer.</red>"
+  insufficient_funds: "<red>Fonds insuffisants. Vous avez besoin de ${amount} pour compléter cette transaction.</red>"
+
+# Messages de Succès
+success:
+  language_changed: "<green>Langue changée avec succès en {language} !</green>"
+  economy_transaction: "<green>Transaction terminée ! Montant : ${amount}</green>"
+  player_teleported: "<green>Téléportation réussie vers {location} !</green>"
+  item_given: "<green>Vous avez reçu {amount}x {item} !</green>"
+
+# Messages d'Information
+info:
+  available_commands: "<blue>Commandes disponibles : /help, /lang, /stats, /economy</blue>"
+  server_info: "<blue>Serveur : {server_name} | Joueurs : {online}/{max} | TPS : {tps}</blue>"
+  player_stats: "<blue>Statistiques du Joueur - Niveau : {level} | Solde : ${balance} | Temps de jeu : {playtime}</blue>"
+  language_current: "<blue>Votre langue actuelle est : {language}</blue>"
+
+# Messages d'Administrateur
+admin:
+  language_stats_header: "<gold>=== Statistiques des Langues ===</gold>"
+  total_players_with_prefs: "<yellow>Total des joueurs avec des préférences de langue : {count}</yellow>"
+  language_stat_line: "<white>{language} : {count} joueurs ({percentage}%)</white>"
+  no_language_stats: "<gray>Aucune statistique de langue disponible.</gray>"
+  reload_complete: "<green>Configuration rechargée avec succès !</green>"
+  player_language_reset: "<green>Préférence de langue réinitialisée pour {player}.</green>"
+
+# Messages d'Économie
+economy:
+  balance: "<green>Votre solde : ${balance}</green>"
+  pay_success: "<green>Vous avez envoyé ${amount} à {player} !</green>"
+  pay_received: "<green>Vous avez reçu ${amount} de {player} !</green>"
+  shop_purchase: "<green>Vous avez acheté {item} pour ${price} !</green>"
+  shop_sell: "<green>Vous avez vendu {item} pour ${price} !</green>"
+
+# Messages d'Émotes
+emotes:
+  wave: "<yellow>{player} salue tout le monde !</yellow>"
+  dance: "<light_purple>{player} danse !</light_purple>"
+  laugh: "<gold>{player} rigole ! 😂</gold>"
+  cry: "<blue>{player} pleure... 😢</blue>"
+  angry: "<red>{player} est en colère ! 😠</red>"
+  love: "<pink>{player} envoie de l'amour à tout le monde ! ❤️</pink>"
+
+# Messages de Métriques
+metrics:
+  performance_good: "<green>Performance du serveur : Excellente (TPS : {tps})</green>"
+  performance_ok: "<yellow>Performance du serveur : Bonne (TPS : {tps})</yellow>"
+  performance_bad: "<red>Performance du serveur : Mauvaise (TPS : {tps})</red>"
+  memory_usage: "<blue>Utilisation mémoire : {used}MB / {max}MB ({percentage}%)</blue>"
+  player_count: "<blue>Joueurs en ligne : {online} / {max}</blue>"
+
+# Aide des Commandes
+help:
+  header: "<gold>=== Commandes Disponibles ===</gold>"
+  lang_command: "<white>/lang <langue> - Changer votre langue</white>"
+  lang_list: "<white>/lang list - Afficher les langues disponibles</white>"
+  economy_balance: "<white>/balance - Vérifier votre solde</white>"
+  economy_pay: "<white>/pay <joueur> <montant> - Envoyer de l'argent à un joueur</white>"
+  emote_wave: "<white>/wave - Saluer tout le monde</white>"
+  emote_dance: "<white>/dance - Commencer à danser</white>"
+  stats_command: "<white>/stats - Afficher vos statistiques</white>"
+  help_command: "<white>/help - Afficher ce message d'aide</white>"
+
+# Temps et Date
+time:
+  format_short: "HH:mm"
+  format_long: "yyyy-MM-dd HH:mm:ss"
+  online_for: "En ligne depuis : {time}"
+  last_seen: "Vu pour la dernière fois : {time}"
+  joined_server: "A rejoint le serveur : {time}"
+
+# Espaces réservés et Variables
+placeholders:
+  player: "Joueur"
+  server: "Serveur"
+  world: "Monde"
+  location: "Emplacement"
+  amount: "Montant"
+  balance: "Solde"
+  level: "Niveau"
+  experience: "Expérience"
+  health: "Santé"
+  food: "Nourriture"
+
+# Messages du Framework
+framework:
+  loading: "<gray>Chargement du Framework BasePlugin...</gray>"
+  loaded: "<green>Framework BasePlugin chargé avec succès !</green>"
+  version: "<blue>Framework BasePlugin v{version}</blue>"
+  author: "<gray>Créé par : {author}</gray>"
+  website: "<blue>Site web : {website}</blue>"

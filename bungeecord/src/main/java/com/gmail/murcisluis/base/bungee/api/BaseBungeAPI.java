@@ -13,7 +13,7 @@ public final class BaseBungeAPI implements BaseAPI {
     public void onLoad(@NotNull BasePlugin plugin){
         if (implementation != null) return;
 
-        implementation = new BaseBungee(plugin);
+        implementation = new BaseBungeeImpl(plugin);
         implementation.load();
     }
     @Override

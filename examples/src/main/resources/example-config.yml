@@ -1,0 +1,162 @@
+# ===========================================
+# Ejemplo de Configuración - config.yml
+# ===========================================
+# Este es un ejemplo de cómo estructurar tu archivo config.yml
+# Copia este archivo como config.yml en tu carpeta de plugin
+
+# Configuración del Servidor
+server:
+  # Nombre del servidor que aparecerá en varios lugares
+  name: "Mi Servidor Minecraft"
+  
+  # Número máximo de jugadores permitidos
+  max-players: 20
+  
+  # Modo de mantenimiento (true = activado, false = desactivado)
+  maintenance: false
+  
+  # Mensaje del día que verán los jugadores
+  motd: "¡Bienvenido a mi servidor!"
+  
+  # Puerto del servidor (solo para referencia)
+  port: 25565
+
+# Configuración de Características
+features:
+  # Sistema de Chat
+  chat:
+    enabled: true
+    format: "<%player%> %message%"
+    prefix: "[Chat]"
+    
+    # Filtro de palabras (opcional)
+    word-filter:
+      enabled: false
+      blocked-words:
+        - "palabra1"
+        - "palabra2"
+  
+  # Sistema de Economía
+  economy:
+    enabled: true
+    starting-money: 1000.0
+    currency-symbol: "$"
+    
+    # Configuración de tiendas
+    shops:
+      enabled: true
+      tax-rate: 0.05  # 5% de impuestos
+  
+  # Sistema de Protección
+  protection:
+    enabled: true
+    default-protection: true
+    max-claims-per-player: 5
+
+# Configuración de Mundos
+worlds:
+  # Lista de mundos permitidos
+  allowed-worlds:
+    - "world"
+    - "world_nether"
+    - "world_the_end"
+  
+  # Configuración específica por mundo
+  world-settings:
+    world:
+      pvp: false
+      difficulty: "normal"
+      spawn-protection: 16
+    
+    world_nether:
+      pvp: true
+      difficulty: "hard"
+      spawn-protection: 0
+
+# Configuración de Base de Datos (opcional)
+database:
+  # Tipo: sqlite, mysql, postgresql
+  type: "sqlite"
+  
+  # Para SQLite
+  file: "data.db"
+  
+  # Para MySQL/PostgreSQL (descomenta si usas)
+  # host: "localhost"
+  # port: 3306
+  # database: "minecraft"
+  # username: "user"
+  # password: "password"
+  # ssl: false
+
+# Configuración de Mensajes
+messages:
+  # Prefijo para todos los mensajes del plugin
+  prefix: "&8[&6MiPlugin&8] &r"
+  
+  # Mensajes de bienvenida
+  welcome:
+    enabled: true
+    message: "&a¡Bienvenido al servidor, %player%!"
+    
+  # Mensajes de despedida
+  goodbye:
+    enabled: true
+    message: "&c%player% ha salido del servidor"
+  
+  # Mensajes de error
+  errors:
+    no-permission: "&cNo tienes permisos para hacer esto"
+    player-not-found: "&cJugador no encontrado"
+    invalid-command: "&cComando inválido"
+
+# Configuración de Comandos
+commands:
+  # Habilitar/deshabilitar comandos específicos
+  enabled-commands:
+    - "help"
+    - "info"
+    - "stats"
+    - "config"
+  
+  # Cooldown para comandos (en segundos)
+  cooldowns:
+    help: 5
+    info: 10
+    stats: 30
+
+# Configuración de Logs
+logging:
+  # Nivel de log: DEBUG, INFO, WARN, ERROR
+  level: "INFO"
+  
+  # Guardar logs en archivo
+  file-logging: true
+  
+  # Rotar logs diariamente
+  daily-rotation: true
+  
+  # Mantener logs por X días
+  keep-days: 7
+
+# Configuración Avanzada
+advanced:
+  # Verificar actualizaciones al iniciar
+  check-updates: true
+  
+  # Enviar estadísticas anónimas
+  metrics: true
+  
+  # Modo debug (más información en consola)
+  debug: false
+  
+  # Configuración de rendimiento
+  performance:
+    # Tamaño del pool de hilos
+    thread-pool-size: 4
+    
+    # Timeout para operaciones async (ms)
+    async-timeout: 5000
+
+# Versión del archivo de configuración (NO MODIFICAR)
+config-version: 1

@@ -1,0 +1,112 @@
+# English Language File
+# BasePlugin Framework Localization Example
+# Language: English (en)
+# Version: 2.1.0
+
+# Welcome and Goodbye Messages
+welcome:
+  message: "<green>Welcome to the server, <yellow>{player}</yellow>!</green>"
+  first_time: "<green>Welcome to the server for the first time, <yellow>{player}</yellow>! Enjoy your stay!</green>"
+
+goodbye:
+  message: "<red>Goodbye, <yellow>{player}</yellow>! See you soon!</red>"
+  kick: "<red>{player} was kicked from the server. Reason: {reason}</red>"
+
+# Error Messages
+error:
+  permission_denied: "<red>You don't have permission to execute this command.</red>"
+  player_not_found: "<red>Player not found.</red>"
+  invalid_command: "<red>Invalid command. Use /help for available commands.</red>"
+  unknown_error: "<red>An unknown error occurred: {error_type}</red>"
+  language_not_available: "<red>Language '{language}' is not available. Available languages: {available}</red>"
+  language_change_failed: "<red>Failed to change language. Please try again.</red>"
+  insufficient_funds: "<red>Insufficient funds. You need ${amount} to complete this transaction.</red>"
+
+# Success Messages
+success:
+  language_changed: "<green>Language successfully changed to {language}!</green>"
+  economy_transaction: "<green>Transaction completed! Amount: ${amount}</green>"
+  player_teleported: "<green>Successfully teleported to {location}!</green>"
+  item_given: "<green>You received {amount}x {item}!</green>"
+
+# Info Messages
+info:
+  available_commands: "<blue>Available commands: /help, /lang, /stats, /economy</blue>"
+  server_info: "<blue>Server: {server_name} | Players: {online}/{max} | TPS: {tps}</blue>"
+  player_stats: "<blue>Player Stats - Level: {level} | Balance: ${balance} | Playtime: {playtime}</blue>"
+  language_current: "<blue>Your current language is: {language}</blue>"
+
+# Admin Messages
+admin:
+  language_stats_header: "<gold>=== Language Statistics ===</gold>"
+  total_players_with_prefs: "<yellow>Total players with language preferences: {count}</yellow>"
+  language_stat_line: "<white>{language}: {count} players ({percentage}%)</white>"
+  no_language_stats: "<gray>No language statistics available.</gray>"
+  reload_complete: "<green>Configuration reloaded successfully!</green>"
+  player_language_reset: "<green>Language preference reset for {player}.</green>"
+
+# Economy Messages
+economy:
+  balance: "<green>Your balance: ${balance}</green>"
+  pay_success: "<green>You sent ${amount} to {player}!</green>"
+  pay_received: "<green>You received ${amount} from {player}!</green>"
+  shop_purchase: "<green>You purchased {item} for ${price}!</green>"
+  shop_sell: "<green>You sold {item} for ${price}!</green>"
+
+# Emotes Messages
+emotes:
+  wave: "<yellow>{player} waves at everyone!</yellow>"
+  dance: "<light_purple>{player} is dancing!</light_purple>"
+  laugh: "<gold>{player} is laughing! 😂</gold>"
+  cry: "<blue>{player} is crying... 😢</blue>"
+  angry: "<red>{player} is angry! 😠</red>"
+  love: "<pink>{player} sends love to everyone! ❤️</pink>"
+
+# Metrics Messages
+metrics:
+  performance_good: "<green>Server performance: Excellent (TPS: {tps})</green>"
+  performance_ok: "<yellow>Server performance: Good (TPS: {tps})</yellow>"
+  performance_bad: "<red>Server performance: Poor (TPS: {tps})</red>"
+  memory_usage: "<blue>Memory usage: {used}MB / {max}MB ({percentage}%)</blue>"
+  player_count: "<blue>Players online: {online} / {max}</blue>"
+
+# Command Help
+help:
+  header: "<gold>=== Available Commands ===</gold>"
+  lang_command: "<white>/lang <language> - Change your language</white>"
+  lang_list: "<white>/lang list - Show available languages</white>"
+  economy_balance: "<white>/balance - Check your balance</white>"
+  economy_pay: "<white>/pay <player> <amount> - Send money to a player</white>"
+  emote_wave: "<white>/wave - Wave at everyone</white>"
+  emote_dance: "<white>/dance - Start dancing</white>"
+  stats_command: "<white>/stats - Show your statistics</white>"
+  help_command: "<white>/help - Show this help message</white>"
+
+# Time and Date
+time:
+  format_short: "HH:mm"
+  format_long: "yyyy-MM-dd HH:mm:ss"
+  online_for: "Online for: {time}"
+  last_seen: "Last seen: {time}"
+  joined_server: "Joined server: {time}"
+
+# Placeholders and Variables
+placeholders:
+  player: "Player"
+  server: "Server"
+  world: "World"
+  location: "Location"
+  amount: "Amount"
+  balance: "Balance"
+  level: "Level"
+  experience: "Experience"
+  health: "Health"
+  food: "Food"
+
+# Framework Messages
+framework:
+  loading: "<gray>Loading BasePlugin Framework...</gray>"
+  loaded: "<green>BasePlugin Framework loaded successfully!</green>"
+  version: "<blue>BasePlugin Framework v{version}</blue>"
+  author: "<gray>Created by: {author}</gray>"
+  website: "<blue>Website: {website}</blue>"

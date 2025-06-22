@@ -4,11 +4,59 @@ configurations {
 
 dependencies {
     api project(':common')
-    compileOnly 'org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT'
+    
+    // Versión base para máxima compatibilidad (desde 1.19.4)
+    compileOnly 'org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT'
+    
+    // Dependencias adicionales
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
     api 'net.kyori:adventure-platform-bukkit:4.3.4'
     compileOnly 'me.clip:placeholderapi:2.11.6'
     api 'net.wesjd:anvilgui:1.10.3-SNAPSHOT'
+}
+
+// Configuraciones para diferentes versiones de Spigot y Paper
+configurations {
+    spigot119 { extendsFrom compileOnly }
+    spigot120 { extendsFrom compileOnly }
+    spigot121 { extendsFrom compileOnly }
+    spigot1212 { extendsFrom compileOnly }
+    spigot1213 { extendsFrom compileOnly }
+    spigot1214 { extendsFrom compileOnly }
+    spigot1215 { extendsFrom compileOnly }
+    spigot1216 { extendsFrom compileOnly }
+    
+    paper119 { extendsFrom compileOnly }
+    paper120 { extendsFrom compileOnly }
+    paper121 { extendsFrom compileOnly }
+    paper1212 { extendsFrom compileOnly }
+    paper1213 { extendsFrom compileOnly }
+    paper1214 { extendsFrom compileOnly }
+    paper1215 { extendsFrom compileOnly }
+    paper1216 { extendsFrom compileOnly }
+}
+
+// Dependencias específicas por versión
+dependencies {
+    // Spigot versions
+    spigot119 'org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT'
+    spigot120 'org.spigotmc:spigot-api:1.20.6-R0.1-SNAPSHOT'
+    spigot121 'org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT'
+    spigot1212 'org.spigotmc:spigot-api:1.21.2-R0.1-SNAPSHOT'
+    spigot1213 'org.spigotmc:spigot-api:1.21.3-R0.1-SNAPSHOT'
+    spigot1214 'org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT'
+    spigot1215 'org.spigotmc:spigot-api:1.21.5-R0.1-SNAPSHOT'
+    spigot1216 'org.spigotmc:spigot-api:1.21.6-R0.1-SNAPSHOT'
+    
+    // Paper versions (mejor rendimiento y más features)
+    paper119 'io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT'
+    paper120 'io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT'
+    paper121 'io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT'
+    paper1212 'io.papermc.paper:paper-api:1.21.2-R0.1-SNAPSHOT'
+    paper1213 'io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT'
+    paper1214 'io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT'
+    paper1215 'io.papermc.paper:paper-api:1.21.5-R0.1-SNAPSHOT'
+    paper1216 'io.papermc.paper:paper-api:1.21.6-R0.1-SNAPSHOT'
 }
 
 tasks {

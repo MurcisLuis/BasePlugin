@@ -23,10 +23,11 @@ import net.md_5.bungee.config.Configuration;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-public class BaseBungee extends Base {
+public abstract class BaseBungee extends Base {
     private CommandManagerBungee commandManager;
     protected BungeeAudiences audience;
-    public BaseBungee(BasePlugin plugin) {
+
+    protected BaseBungee(BasePlugin plugin) {
         super(plugin);
     }
 

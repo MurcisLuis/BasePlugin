@@ -1,0 +1,181 @@
+# Configuración de Métricas - Ejemplo
+# Este archivo demuestra cómo configurar un sistema de métricas y estadísticas
+
+metrics:
+  # Habilitar sistema de métricas
+  enabled: true
+  
+  # Intervalo de recolección de datos (segundos)
+  collection-interval: 30
+  
+  # Habilitar métricas de rendimiento
+  performance-tracking: true
+  
+  # Habilitar métricas de jugadores
+  player-tracking: true
+  
+  # Configuración de almacenamiento
+  storage:
+    # Tipo de almacenamiento: FILE, DATABASE, MEMORY
+    type: "FILE"
+    # Archivo donde guardar las métricas
+    file: "metrics.json"
+    # Retener datos por X días
+    retention-days: 30
+    # Comprimir datos antiguos
+    compress-old-data: true
+  
+  # Configuración de métricas del servidor
+  server-metrics:
+    enabled: true
+    track:
+      # Uso de CPU
+      cpu-usage: true
+      # Uso de memoria
+      memory-usage: true
+      # TPS (Ticks por segundo)
+      tps: true
+      # Número de jugadores online
+      online-players: true
+      # Número de chunks cargados
+      loaded-chunks: true
+      # Número de entidades
+      entity-count: true
+      # Tiempo de respuesta de comandos
+      command-response-time: true
+  
+  # Configuración de métricas de jugadores
+  player-metrics:
+    enabled: true
+    track:
+      # Tiempo de juego
+      playtime: true
+      # Bloques rotos
+      blocks-broken: true
+      # Bloques colocados
+      blocks-placed: true
+      # Distancia caminada
+      distance-walked: true
+      # Muertes
+      deaths: true
+      # Kills de mobs
+      mob-kills: true
+      # Kills de jugadores (PvP)
+      player-kills: true
+      # Mensajes enviados
+      messages-sent: true
+      # Comandos ejecutados
+      commands-executed: true
+      # Items crafteados
+      items-crafted: true
+      # Experiencia ganada
+      experience-gained: true
+  
+  # Configuración de métricas económicas
+  economy-metrics:
+    enabled: true
+    track:
+      # Transacciones totales
+      total-transactions: true
+      # Dinero en circulación
+      money-in-circulation: true
+      # Transacciones por hora
+      transactions-per-hour: true
+      # Jugador más rico
+      richest-player: true
+      # Promedio de dinero por jugador
+      average-money-per-player: true
+  
+  # Configuración de alertas
+  alerts:
+    enabled: true
+    # Alerta cuando el TPS baje de este valor
+    low-tps-threshold: 18.0
+    # Alerta cuando el uso de memoria supere este porcentaje
+    high-memory-threshold: 85
+    # Alerta cuando el uso de CPU supere este porcentaje
+    high-cpu-threshold: 80
+    # Enviar alertas a estos jugadores (permisos)
+    notify-permissions:
+      - "metrics.alerts.admin"
+      - "metrics.alerts.moderator"
+  
+  # Configuración de reportes
+  reports:
+    enabled: true
+    # Generar reporte diario
+    daily-report: true
+    # Generar reporte semanal
+    weekly-report: true
+    # Generar reporte mensual
+    monthly-report: true
+    # Formato del reporte: JSON, HTML, TXT
+    format: "HTML"
+    # Directorio donde guardar reportes
+    output-directory: "reports/"
+    # Incluir gráficos en reportes HTML
+    include-charts: true
+  
+  # Configuración de exportación
+  export:
+    enabled: false
+    # Exportar a servicios externos
+    services:
+      # Configuración para Grafana
+      grafana:
+        enabled: false
+        url: "http://localhost:3000"
+        api-key: "your-api-key"
+        dashboard-id: "minecraft-metrics"
+      
+      # Configuración para InfluxDB
+      influxdb:
+        enabled: false
+        url: "http://localhost:8086"
+        database: "minecraft"
+        username: "admin"
+        password: "password"
+      
+      # Configuración para webhook
+      webhook:
+        enabled: false
+        url: "https://your-webhook-url.com/metrics"
+        interval: 300 # segundos
+  
+  # Configuración de métricas personalizadas
+  custom-metrics:
+    enabled: true
+    # Ejemplos de métricas personalizadas
+    examples:
+      # Contador de uso de emotes
+      emote-usage:
+        type: "COUNTER"
+        description: "Número total de emotes usados"
+        labels:
+          - "emote_type"
+          - "player"
+      
+      # Tiempo promedio de respuesta de la API
+      api-response-time:
+        type: "HISTOGRAM"
+        description: "Tiempo de respuesta de la API en milisegundos"
+        buckets: [1, 5, 10, 25, 50, 100, 250, 500, 1000]
+      
+      # Gauge para jugadores en diferentes mundos
+      players-per-world:
+        type: "GAUGE"
+        description: "Número de jugadores por mundo"
+        labels:
+          - "world_name"
+  
+  # Configuración de la interfaz web
+  web-interface:
+    enabled: true
+    port: 8080
+    host: "localhost"
+    # Habilitar autenticación
+    authentication: true
+    username: "admin"
+    password: "metrics123"
+    # Actualización automática de la página (segundos)
+    auto-refresh: 30

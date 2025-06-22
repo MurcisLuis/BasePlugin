@@ -1,0 +1,15 @@
+name: YourPluginName
+version: '${version}'
+main: com.yourpackage.yourplugin.YourMainClass
+api-version: 1.21
+authors: [ YourName ]
+description: Your plugin description
+softdepend:
+  - PlaceholderAPI
+
+permissions:
+  yourplugin.admin:
+    description: Allow player to use admin commands
+  yourplugin.use:
+    default: true
+    description: Allow player to use default permissions

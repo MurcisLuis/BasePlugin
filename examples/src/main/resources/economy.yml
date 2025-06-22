@@ -1,0 +1,50 @@
+# Configuración de Economía - Ejemplo
+# Este archivo demuestra cómo configurar un sistema de economía
+
+economy:
+  # Balance inicial para nuevos jugadores
+  starting-balance: 1000.0
+  
+  # Símbolo de la moneda
+  currency-symbol: "$"
+  
+  # Nombre de la moneda
+  currency-name: "Coins"
+  currency-plural: "Coins"
+  
+  # Integración con Vault
+  vault-integration: true
+  
+  # Configuración de la tienda
+  shop:
+    enabled: true
+    # Descuento para VIPs (porcentaje)
+    vip-discount: 10
+    # Impuesto en las ventas (porcentaje)
+    sales-tax: 5
+  
+  # Configuración de transferencias
+  transfers:
+    enabled: true
+    # Mínimo para transferir
+    minimum-amount: 1.0
+    # Máximo para transferir
+    maximum-amount: 10000.0
+    # Comisión por transferencia (porcentaje)
+    fee-percentage: 2
+  
+  # Configuración de trabajos/empleos
+  jobs:
+    enabled: true
+    # Salario base por hora
+    base-salary: 50.0
+    # Bonificación por experiencia
+    experience-bonus: 1.5
+  
+  # Configuración del banco
+  bank:
+    enabled: true
+    # Interés anual (porcentaje)
+    interest-rate: 5.0
+    # Límite de depósito
+    deposit-limit: 100000.0

@@ -1,0 +1,146 @@
+# Configuración de Emotes - Ejemplo
+# Este archivo demuestra cómo configurar un sistema de emotes
+
+emotes:
+  # Habilitar sistema de emotes
+  enabled: true
+  
+  # Cooldown entre emotes (segundos)
+  cooldown: 5
+  
+  # Habilitar efectos de partículas
+  particles: true
+  
+  # Habilitar sonidos
+  sounds: true
+  
+  # Configuración de emotes disponibles
+  available-emotes:
+    dance:
+      name: "Baile"
+      description: "Realiza un baile divertido"
+      permission: "emotes.dance"
+      cooldown: 10
+      particles:
+        - type: "HEART"
+          count: 10
+          offset: 1.0
+      sound: "ENTITY_PLAYER_LEVELUP"
+      animation:
+        - "El jugador {player} está bailando! 💃"
+        - "¡Qué movimientos tan geniales!"
+    
+    wave:
+      name: "Saludo"
+      description: "Saluda a otros jugadores"
+      permission: "emotes.wave"
+      cooldown: 3
+      particles:
+        - type: "VILLAGER_HAPPY"
+          count: 5
+          offset: 0.5
+      sound: "ENTITY_VILLAGER_YES"
+      animation:
+        - "{player} saluda amigablemente 👋"
+    
+    cry:
+      name: "Llorar"
+      description: "Expresa tristeza"
+      permission: "emotes.cry"
+      cooldown: 8
+      particles:
+        - type: "WATER_DROP"
+          count: 15
+          offset: 0.3
+      sound: "ENTITY_VILLAGER_NO"
+      animation:
+        - "{player} está llorando 😢"
+        - "¡Alguien console a {player}!"
+    
+    laugh:
+      name: "Reír"
+      description: "Ríe a carcajadas"
+      permission: "emotes.laugh"
+      cooldown: 5
+      particles:
+        - type: "VILLAGER_HAPPY"
+          count: 20
+          offset: 1.5
+      sound: "ENTITY_PLAYER_LAUGH"
+      animation:
+        - "{player} se está riendo mucho 😂"
+        - "¡La risa es contagiosa!"
+    
+    angry:
+      name: "Enojado"
+      description: "Muestra enojo"
+      permission: "emotes.angry"
+      cooldown: 7
+      particles:
+        - type: "SMOKE_NORMAL"
+          count: 10
+          offset: 0.5
+        - type: "FLAME"
+          count: 5
+          offset: 0.3
+      sound: "ENTITY_GHAST_SCREAM"
+      animation:
+        - "{player} está muy enojado 😡"
+        - "¡Mejor manténganse alejados!"
+  
+  # Configuración de permisos
+  permissions:
+    # Permiso base para usar emotes
+    base: "emotes.use"
+    # Permiso para usar todos los emotes
+    all: "emotes.*"
+    # Permiso para administrar emotes
+    admin: "emotes.admin"
+  
+  # Configuración de mensajes
+  messages:
+    cooldown: "<red>Debes esperar {time} segundos antes de usar otro emote.</red>"
+    no-permission: "<red>No tienes permiso para usar este emote.</red>"
+    emote-used: "<green>Has usado el emote: {emote}</green>"
+    invalid-emote: "<red>Emote no válido. Usa /emotes list para ver los disponibles.</red>"
+    emotes-disabled: "<red>Los emotes están deshabilitados en este servidor.</red>"
+  
+  # Configuración de GUI
+  gui:
+    enabled: true
+    title: "🎭 Selector de Emotes"
+    size: 27
+    # Configuración de items en el GUI
+    items:
+      dance:
+        material: "MUSIC_DISC_CAT"
+        slot: 10
+        name: "<yellow>💃 Baile</yellow>"
+        lore:
+          - "<gray>Realiza un baile divertido</gray>"
+          - "<gray>Cooldown: 10 segundos</gray>"
+          - "<green>Click para usar</green>"
+      wave:
+        material: "FEATHER"
+        slot: 12
+        name: "<yellow>👋 Saludo</yellow>"
+        lore:
+          - "<gray>Saluda a otros jugadores</gray>"
+          - "<gray>Cooldown: 3 segundos</gray>"
+          - "<green>Click para usar</green>"
+      cry:
+        material: "WATER_BUCKET"
+        slot: 14
+        name: "<yellow>😢 Llorar</yellow>"
+        lore:
+          - "<gray>Expresa tristeza</gray>"
+          - "<gray>Cooldown: 8 segundos</gray>"
+          - "<green>Click para usar</green>"
+      laugh:
+        material: "EMERALD"
+        slot: 16
+        name: "<yellow>😂 Reír</yellow>"
+        lore:
+          - "<gray>Ríe a carcajadas</gray>"
+          - "<gray>Cooldown: 5 segundos</gray>"
+          - "<green>Click para usar</green>"

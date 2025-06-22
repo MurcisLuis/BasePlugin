@@ -31,13 +31,12 @@ import java.io.File;
 import java.util.logging.Level;
 
 @Getter
-public class BaseSpigot extends Base {
+public abstract class BaseSpigot extends Base {
 
     private CommandManagerSpigot commandManager;
     protected BukkitAudiences audience;
 
-
-    BaseSpigot(BasePlugin plugin) {
+    protected BaseSpigot(BasePlugin plugin) {
         super(plugin);
     }
 

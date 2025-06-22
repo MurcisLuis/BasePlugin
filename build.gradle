@@ -11,10 +11,78 @@ java {
     withJavadocJar()
 }
 
+task generateJavadoc {
+    description = 'Generate Javadoc for common module (core API)'
+    group = 'documentation'
+    
+    doLast {
+        // Create javadoc directory
+        def javadocDir = file('javadoc')
+        if (javadocDir.exists()) {
+            javadocDir.deleteDir()
+        }
+        javadocDir.mkdirs()
+        
+        // Collect Java source files only from common module (no external dependencies)
+        def sourceFiles = []
+        def srcDir = file('common/src/main/java')
+        if (srcDir.exists()) {
+            srcDir.eachFileRecurse { file ->
+                if (file.name.endsWith('.java')) {
+                    sourceFiles.add(file.absolutePath)
+                }
+            }
+        }
+        
+        println "Found ${sourceFiles.size()} Java files in common module"
+        
+        if (sourceFiles.isEmpty()) {
+            println "No Java source files found in common module"
+            return
+        }
+        
+        // Create a simple batch file to run javadoc
+        def batchFile = file('build/tmp/run-javadoc.bat')
+        batchFile.parentFile.mkdirs()
+        
+        def javadocCommand = "javadoc -d \"${javadocDir.absolutePath}\" " +
+            "-encoding UTF-8 -charset UTF-8 -author -version " +
+            "-windowtitle \"BasePlugin Core API Documentation\" " +
+            "-doctitle \"BasePlugin Core API Documentation\" " +
+            "-Xdoclint:none -source 21 " +
+            "-link https://docs.oracle.com/en/java/javase/21/docs/api/ " +
+            sourceFiles.collect { "\"${it}\"" }.join(' ')
+            
+        batchFile.text = "@echo off\n" + javadocCommand
+        
+        println "Generating Javadoc for common module to: ${javadocDir.absolutePath}"
+        
+        // Execute the batch file
+        def process = "cmd /c \"${batchFile.absolutePath}\"".execute()
+        process.waitFor()
+        
+        if (process.exitValue() == 0) {
+            println "Javadoc generation completed successfully!"
+            println "Documentation available at: ${javadocDir.absolutePath}/index.html"
+            
+            // List generated files
+            def indexFile = new File(javadocDir, 'index.html')
+            if (indexFile.exists()) {
+                println "✓ Main documentation page created"
+            }
+        } else {
+            println "Javadoc generation failed"
+            println "Error output:"
+            println process.errorStream.text
+        }
+    }
+}
+
 allprojects {
     repositories {
         mavenCentral()
         maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+        maven { url 'https://repo.papermc.io/repository/maven-public/' } // Paper repository
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
         maven { url 'https://oss.sonatype.org/content/groups/public/' }
         maven { url 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
