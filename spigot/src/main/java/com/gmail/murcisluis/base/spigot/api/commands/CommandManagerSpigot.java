@@ -33,7 +33,7 @@ public class CommandManagerSpigot {
 
     public void destroy() {
         if (!commands.isEmpty()) {
-            commands.values().forEach(CommandManagerSpigot::unregister);
+            commands.values().forEach(this::unregister);
             commands.clear();
         }
     }
