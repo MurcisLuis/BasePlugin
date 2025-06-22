@@ -55,7 +55,7 @@ public abstract class BaseSpigot extends Base {
         this.audience=BukkitAudiences.create(getPlugin());
 
 
-        this.commandManager = new CommandManagerSpigot();
+        this.commandManager = new CommandManagerSpigot(getPlugin());
 
     }
     public void disable() {

@@ -3,9 +3,12 @@ package com.gmail.murcisluis.base.spigot.api.commands;
 import com.gmail.murcisluis.base.common.api.utils.reflect.ReflectField;
 import com.gmail.murcisluis.base.common.api.utils.reflect.ReflectMethod;
 import com.gmail.murcisluis.base.common.api.utils.reflect.ReflectionUtil;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.SimpleCommandMap;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,7 +18,14 @@ import java.util.Set;
 public class CommandManagerSpigot {
 
     private final Map<String, AbstractCommandSpigot> commands = new HashMap<>();
+    @Getter
+    @Setter
     private AbstractCommandSpigot mainCommand;
+    private final JavaPlugin plugin;
+
+    public CommandManagerSpigot(JavaPlugin plugin) {
+        this.plugin = plugin;
+    }
 
     /*
      *  General Methods
@@ -31,22 +41,16 @@ public class CommandManagerSpigot {
     public void registerCommand(AbstractCommandSpigot command) {
         if (commands.containsKey(command.getName())) return;
         commands.put(command.getName(), command);
-        CommandManagerSpigot.register(command);
+        this.register(command);
     }
 
     public void unregisterCommand(String name) {
         if (!commands.containsKey(name)) return;
         AbstractCommandSpigot command = commands.remove(name);
-        CommandManagerSpigot.unregister(command);
+        this.unregister(command);
     }
 
-    public void setMainCommand(AbstractCommandSpigot command) {
-        this.mainCommand = command;
-    }
 
-    public AbstractCommandSpigot getMainCommand() {
-        return mainCommand;
-    }
 
     public Set<String> getCommandNames() {
         return commands.keySet();
@@ -70,14 +74,14 @@ public class CommandManagerSpigot {
         COMMAND_MAP_KNOWN_COMMANDS_FIELD = new ReflectField<>(SimpleCommandMap.class, "knownCommands");
     }
 
-    public static void register(Command command) {
+    public void register(Command command) {
         if (command == null) return;
         SimpleCommandMap commandMap = GET_COMMAND_MAP_METHOD.invoke(Bukkit.getServer());
-        CommandManagerSpigot.unregister(command);
-        commandMap.register("BasePlugin", command);
+        this.unregister(command);
+        commandMap.register(plugin.getDescription().getName(), command);
     }
 
-    public static void unregister(Command command) {
+    public void unregister(Command command) {
         if (command == null) return;
         SimpleCommandMap commandMap = GET_COMMAND_MAP_METHOD.invoke(Bukkit.getServer());
         Map<String, Command> cmdMap = COMMAND_MAP_KNOWN_COMMANDS_FIELD.getValue(commandMap);
