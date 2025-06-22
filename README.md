@@ -1,6 +1,6 @@
 # BasePlugin Framework
 
-[![Version](https://img.shields.io/badge/version-2.2.0-blue.svg)](https://github.com/murcisluis/BasePlugin)
+[![Version](https://img.shields.io/badge/version-2.3.0-blue.svg)](https://github.com/murcisluis/BasePlugin)
 [![JitPack](https://jitpack.io/v/MurcisLuis/BasePlugin.svg)](https://jitpack.io/#MurcisLuis/BasePlugin)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.java.net/projects/jdk/21/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -49,23 +49,23 @@ repositories {
 #### 🔧 Para Spigot/Paper
 ```gradle
 dependencies {
-    implementation 'com.github.murcisluis.BasePlugin:spigot:v2.0.0'
-    implementation 'com.github.murcisluis.BasePlugin:common:v2.0.0'
+    implementation 'com.github.murcisluis.BasePlugin:spigot:v2.3.0'
+    implementation 'com.github.murcisluis.BasePlugin:common:v2.3.0'
 }
 ```
 
 #### 🌐 Para BungeeCord/Waterfall
 ```gradle
 dependencies {
-    implementation 'com.github.murcisluis.BasePlugin:bungeecord:v2.0.0'
-    implementation 'com.github.murcisluis.BasePlugin:common:v2.0.0'
+    implementation 'com.github.murcisluis.BasePlugin:bungeecord:v2.3.0'
+    implementation 'com.github.murcisluis.BasePlugin:common:v2.3.0'
 }
 ```
 
 #### 📦 Todos los módulos
 ```gradle
 dependencies {
-    implementation 'com.github.murcisluis:BasePlugin:v2.0.0'
+    implementation 'com.github.murcisluis:BasePlugin:v2.3.0'
 }
 ```
 
@@ -94,12 +94,12 @@ dependencies {
     <dependency>
         <groupId>com.github.murcisluis.BasePlugin</groupId>
         <artifactId>spigot</artifactId>
-        <version>v2.0.0</version>
+        <version>v2.3.0</version>
     </dependency>
     <dependency>
         <groupId>com.github.murcisluis.BasePlugin</groupId>
         <artifactId>common</artifactId>
-        <version>v2.0.0</version>
+        <version>v2.3.0</version>
     </dependency>
 </dependencies>
 ```
@@ -110,12 +110,12 @@ dependencies {
     <dependency>
         <groupId>com.github.murcisluis.BasePlugin</groupId>
         <artifactId>bungeecord</artifactId>
-        <version>v2.0.0</version>
+        <version>v2.3.0</version>
     </dependency>
     <dependency>
         <groupId>com.github.murcisluis.BasePlugin</groupId>
         <artifactId>common</artifactId>
-        <version>v2.0.0</version>
+        <version>v2.3.0</version>
     </dependency>
 </dependencies>
 ```
@@ -286,7 +286,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.gmail.murcisluis:BasePlugin-spigot:2.0.0'
+    implementation 'com.gmail.murcisluis:BasePlugin-spigot:2.3.0'
     compileOnly 'org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT'
 }
 
@@ -362,9 +362,18 @@ examples/
 - **Examples**: Implementaciones completas y funcionales
 - **Tu Plugin**: Adaptación personalizada de los ejemplos
 
-## 🔄 Migración desde v1.0
+## 🔄 Changelog
 
-### Cambios Principales
+### v2.3.0 - Mejoras en CommandManagerSpigot
+
+- **🔧 CommandManagerSpigot Dinámico**: El registro de comandos ahora usa el nombre del plugin dinámicamente en lugar de "BasePlugin" hardcoded
+- **🏗️ Constructor Mejorado**: CommandManagerSpigot ahora requiere una instancia de JavaPlugin en su constructor
+- **📦 Métodos de Instancia**: Los métodos `register()` y `unregister()` ahora son de instancia en lugar de estáticos
+- **🎯 Mayor Flexibilidad**: El framework puede ser usado por cualquier plugin sin modificaciones
+
+### Migración desde v1.0
+
+#### Cambios Principales
 
 1. **Java 21**: Actualización de Java 17 a Java 21
 2. **Gradle 8.3+**: Actualización del sistema de build
