@@ -7,7 +7,7 @@ import com.gmail.murcisluis.base.spigot.api.commands.CommandManagerSpigot;
 import com.gmail.murcisluis.base.spigot.api.utils.config.ConfigAdapterSpigot;
 import com.gmail.murcisluis.base.spigot.api.utils.scheduler.SchedulerSpigot;
 import com.gmail.murcisluis.base.examples.spigot.commands.ExampleCommandSpigot;
-import com.gmail.murcisluis.base.examples.spigot.ExampleBaseSpigotAPI;
+import com.gmail.murcisluis.base.spigot.api.BaseSpigotAPI;
 import com.gmail.murcisluis.base.examples.spigot.ExampleBaseSpigotImpl;
 import com.gmail.murcisluis.base.common.api.BasePlugin;
 import com.gmail.murcisluis.base.common.api.Description;
@@ -41,7 +41,7 @@ public final class ExampleSpigotPlugin extends JavaPlugin implements BasePlugin 
     public void onLoad() {
         // Inicializar el framework con nuestra implementación personalizada
         configAdapter = new ConfigAdapterSpigot();
-        BaseAPIFactory.initialize(new ExampleBaseSpigotAPI());
+        BaseAPIFactory.initialize(new BaseSpigotAPI<>(ExampleBaseSpigotImpl.class));
         BaseAPIFactory.getAPI().onLoad(this);
     }
 
@@ -52,7 +52,9 @@ public final class ExampleSpigotPlugin extends JavaPlugin implements BasePlugin 
         S.setInstance(new SchedulerSpigot());
         
         // Obtener nuestra implementación personalizada
-        ExampleBaseSpigotImpl base = ExampleBaseSpigotAPI.getExampleImplementation();
+        @SuppressWarnings("unchecked")
+        BaseSpigotAPI<ExampleBaseSpigotImpl> api = (BaseSpigotAPI<ExampleBaseSpigotImpl>) BaseAPIFactory.getAPI();
+        ExampleBaseSpigotImpl base = api.get();
         CommandManagerSpigot commandManager = base.getCommandManager();
 
         // EJEMPLO: Registrar un comando personalizado (OPCIONAL)

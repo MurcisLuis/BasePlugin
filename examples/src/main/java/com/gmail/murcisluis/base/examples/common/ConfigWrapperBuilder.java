@@ -188,6 +188,11 @@ public class ConfigWrapperBuilder {
         return this;
     }
     
+    public ConfigWrapperBuilder protectionEnabled(boolean protectionEnabled) {
+        this.protectionEnabled = protectionEnabled;
+        return this;
+    }
+    
     // Configuración de mundos
     public ConfigWrapperBuilder allowedWorlds(List<String> allowedWorlds) {
         this.allowedWorlds = allowedWorlds;
@@ -252,6 +257,11 @@ public class ConfigWrapperBuilder {
     public ConfigWrapperBuilder advanced(boolean checkUpdates, boolean metrics, boolean debug) {
         this.checkUpdates = checkUpdates;
         this.metrics = metrics;
+        this.debug = debug;
+        return this;
+    }
+    
+    public ConfigWrapperBuilder debug(boolean debug) {
         this.debug = debug;
         return this;
     }

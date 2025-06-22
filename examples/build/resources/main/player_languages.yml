@@ -1,0 +1,51 @@
+# Player Language Preferences Configuration
+# This file stores individual player language preferences
+# Format: UUID -> language_code
+
+# Metadata
+last-updated: 0
+total-players: 0
+
+# Player language preferences
+# Each entry maps a player UUID to their preferred language code
+players:
+  # Example entries (these will be automatically managed by the system):
+  # "550e8400-e29b-41d4-a716-446655440000": "en"
+  # "6ba7b810-9dad-11d1-80b4-00c04fd430c8": "es"
+  # "6ba7b811-9dad-11d1-80b4-00c04fd430c8": "fr"
+
+# Configuration options
+config:
+  # Auto-detect language from client locale
+  auto-detect-language: true
+  
+  # Save player preferences immediately when changed
+  immediate-save: true
+  
+  # Clean up preferences for players who haven't joined in X days
+  cleanup-after-days: 30
+  
+  # Default language for new players
+  default-language: "en"
+  
+  # Supported languages (must match loaded language files)
+  supported-languages:
+    - "en"
+    - "es"
+    - "fr"
+    - "de"
+    - "pt"
+    - "it"
+    - "ru"
+    - "zh"
+    - "ja"
+    - "ko"
+
+# Statistics (automatically updated)
+statistics:
+  most-used-language: "en"
+  language-distribution:
+    en: 0
+    es: 0
+    fr: 0
+  last-statistics-update: 0
